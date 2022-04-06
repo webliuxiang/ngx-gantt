@@ -1,6 +1,8 @@
 # Base Version
 
-[v11.0.0]
+```bash
+v11.0.0
+```
 
 # ngx-gantt
 
