@@ -1,6 +1,6 @@
 # Base Version
 
-[![v11.0.0]]
+[v11.0.0]
 
 # ngx-gantt
 
