@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, ContentChild, TemplateRef, EventEmitter, OnInit, Output } from '@angular/core';
 import { GanttTableEvent } from '../class';
 
 @Component({

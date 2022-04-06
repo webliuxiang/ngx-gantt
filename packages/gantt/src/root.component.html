@@ -1,5 +1,6 @@
 <div class="gantt-side" [style.width.px]="sideWidth">
   <div class="gantt-side-container">
+    <ng-template [ngTemplateOutlet]="subsideTemplate"></ng-template>
     <ng-template [ngTemplateOutlet]="sideTemplate"></ng-template>
   </div>
 </div>
@@ -7,6 +8,7 @@
   <gantt-calendar-overlay></gantt-calendar-overlay>
   <gantt-drag-backdrop></gantt-drag-backdrop>
   <div class="gantt-main">
+    <ng-template [ngTemplateOutlet]="submainTemplate"></ng-template>
     <ng-template [ngTemplateOutlet]="mainTemplate"></ng-template>
   </div>
 </div>

@@ -12,6 +12,7 @@ import { DocgeniTemplateModule } from '@docgeni/template';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppGanttFlatComponent } from './gantt-flat/component/flat.component';
 import { EXAMPLE_MODULES } from './content/example-modules';
+import { GanttTestComponent } from './gantt-test/gantt-test.component';
 
 @NgModule({
     declarations: [
@@ -19,7 +20,8 @@ import { EXAMPLE_MODULES } from './content/example-modules';
         AppGanttExampleComponent,
         AppGanttFlatExampleComponent,
         AppGanttRangeExampleComponent,
-        AppGanttFlatComponent
+        AppGanttFlatComponent,
+        GanttTestComponent
     ],
     imports: [
         BrowserModule,

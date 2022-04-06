@@ -15,7 +15,9 @@
     ></div>
   </div>
 </div>
+
 <div class="gantt-table-body">
+  <!-- 无数据 -->
   <ng-container *ngIf="!groups.length && !items.length">
     <ng-container *ngIf="!emptyTemplate">
       <gantt-icon class="empty-icon" iconName="empty"></gantt-icon>
@@ -24,6 +26,7 @@
     <ng-template [ngTemplateOutlet]="emptyTemplate"></ng-template>
   </ng-container>
 
+  <!-- 表格 -->
   <ng-container *ngIf="groups && groups.length > 0; else itemsTemplate">
     <ng-container *ngFor="let group of groups">
       <div class="gantt-table-group" [ngClass]="group.class">
@@ -63,10 +66,12 @@
 
 <div #dragLine class="gantt-table-drag-auxiliary-line"></div>
 
+<!-- 表格内容 -->
 <ng-template #itemsTemplate>
   <ng-template [ngTemplateOutlet]="ganttItems" [ngTemplateOutletContext]="{ items: items, level: 0 }"></ng-template>
 </ng-template>
 
+<!-- 内容详情 -->
 <ng-template #ganttItems let-group="group" let-items="items" let-level="level">
   <ng-container *ngFor="let item of items">
     <div
@@ -75,6 +80,10 @@
       [class.gantt-table-item-with-group]="group"
       [style.height.px]="gantt.styles.lineHeight"
       [style.lineHeight.px]="gantt.styles.lineHeight"
+      (click)="colClick.emit(item)"
+      (mouseover)="formatData(item,true)"
+      (mouseout)="formatData(item,false)"
+      [style.background]="item.itemcolor"
     >
       <div class="gantt-table-column" *ngFor="let column of columnList; let first = first" [style.width]="column.columnWidth">
         <div *ngIf="first" class="gantt-expand-icon" [style.marginLeft.px]="level * 20">
@@ -103,3 +112,4 @@
     ></ng-template>
   </ng-container>
 </ng-template>
+

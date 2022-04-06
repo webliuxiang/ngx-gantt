@@ -21,14 +21,14 @@ import {
 import { startWith, takeUntil, take, finalize } from 'rxjs/operators';
 import { Subject, Observable } from 'rxjs';
 import { GanttUpper, GANTT_UPPER_TOKEN } from './gantt-upper';
-import { GanttLinkDragEvent, GanttLineClickEvent, GanttItemInternal, GanttItem } from './class';
+import { GanttLinkDragEvent, GanttLineClickEvent, GanttItemInternal, GanttItem, GanttGroupInternal, GanttGroup } from './class';
 import { NgxGanttTableColumnComponent } from './table/gantt-column.component';
 import { sideWidth } from './gantt.styles';
 import { coerceCssPixelValue } from '@angular/cdk/coercion';
 import { NgxGanttTableComponent } from './table/gantt-table.component';
 
 export const defaultColumnWidth = 100;
-export const minColumnWidth = 80;
+export const minColumnWidth = 40;
 
 @Component({
     selector: 'ngx-gantt',
@@ -61,6 +61,8 @@ export class NgxGanttComponent extends GanttUpper implements OnInit, AfterViewIn
     @ContentChildren(NgxGanttTableColumnComponent, { descendants: true }) columns: QueryList<NgxGanttTableColumnComponent>;
 
     @ContentChild('tableEmpty', { static: true }) tableEmptyTemplate: TemplateRef<any>;
+
+    @ViewChild('ganttMain') ganttMain;
 
     private ngUnsubscribe$ = new Subject();
 
@@ -123,6 +125,20 @@ export class NgxGanttComponent extends GanttUpper implements OnInit, AfterViewIn
         } else {
             item.setExpand(false);
             this.expandChange.emit();
+        }
+    }
+
+    colClick(item) {
+        // console.log("这是父组件的点击事件");
+        this.ganttMain.scrollCenter(item);
+    }
+
+    colHover(item) {
+        // console.log("这是父组件的hover事件");
+        if (item.type) {
+            this.ganttMain.addGanttItemHoverStyle(item.item.id)
+        } else {
+            this.ganttMain.removeGanttItemHoverStyle(item.item.id)
         }
     }
 

@@ -1,3 +1,24 @@
+export const mockSubItems = [
+    {
+        id: '1',
+        title: 'VERSION 0101',
+        start: 1644035675,
+        color: '#FF0000',
+    },
+    {
+        id: '2',
+        title: 'VERSION 0102',
+        start: 1644935675,
+        end: 1667990702,
+        color: '#9ACD32',
+    },
+    {
+        id: '3',
+        title: 'VERSION 0103',
+        end: 1642018400,
+    },
+
+]
 export const mockGroups = [
     {
         id: '00001',
@@ -24,7 +45,7 @@ export const mockGroups = [
 
 export const mockItems = [
     {
-        id: 'item-0101',
+        id: '1',
         title: 'VERSION 0101',
         start: 1644035675,
         group_id: '00001',
@@ -37,126 +58,135 @@ export const mockItems = [
                 start: 1644035675,
                 group_id: '00001',
                 color: '#FF0000',
+                itemcolor: '#FF0000',
                 linkable: false
             }
         ]
     },
     {
-        id: 'item-0102',
+        id: '2',
         title: 'VERSION 0102',
         start: 1644935675,
         end: 1667990702,
         color: '#9ACD32',
+        itemcolor: 'pink',
         group_id: '00001',
         expandable: true
     },
     {
-        id: 'item-0103',
+        id: '3',
         title: 'VERSION 0103',
         end: 1642018400,
+        itemcolor: 'green',
         group_id: '00001'
     },
     {
-        id: 'item-0104',
+        id: '4',
         title: 'VERSION 0104',
+        itemcolor: 'green',
         group_id: '00001',
     },
     {
-        id: 'item-0201',
+        id: '5',
         title: 'VERSION 0201',
+        itemcolor: 'green',
         group_id: '00002'
     },
     {
-        id: 'item-0202',
+        id: '6',
         title: 'VERSION 0202',
         start: 1646035675,
         end: 1647018400,
         group_id: '00002',
         color: 'rgb(52, 143, 228, 0.5)',
+        itemcolor: 'lightblue',
         barStyle: {
             border: '1px solid rgb(52, 143, 228)'
         }
     },
     {
-        id: 'item-0203',
+        id: '7',
         title: 'VERSION 0203',
         start: 1644235675,
         end: 1646718400,
+        itemcolor: 'lightgreen',
         group_id: '00002',
     },
     {
-        id: 'item-0204',
+        id: '8',
         title: 'VERSION 0204',
         start: 1646035675,
         end: 1647418400,
+        itemcolor: 'yellow',
         group_id: '00002',
     },
 
     {
-        id: 'item-0301',
+        id: '9',
         title: 'VERSION 0301',
         start: 1646035675,
         end: 1649018400,
+        itemcolor: 'orange',
         group_id: '00003'
     },
     {
-        id: 'item-0302',
+        id: '10',
         title: 'VERSION 0302',
         start: 1642035675,
         end: 1648018400,
         group_id: '00003'
     },
     {
-        id: 'item-0303',
+        id: '11',
         title: 'VERSION 0303',
         start: 1644135675,
         end: 1645018400,
         group_id: '00003'
     },
     {
-        id: 'item-0401',
+        id: '12',
         title: 'VERSION 0401',
         start: 1645035675,
         end: 1647018400,
         group_id: '00004'
     },
     {
-        id: 'item-0402',
+        id: '13',
         title: 'VERSION 0402',
         start: 1646035675,
         end: 1649918400,
         group_id: '00004'
     },
     {
-        id: 'item-0403',
+        id: '14',
         title: 'VERSION 0403',
         start: 1643035675,
         end: 1649018400,
         group_id: '00004'
     },
     {
-        id: 'item-0404',
+        id: '15',
         title: 'VERSION 0404',
         start: 1646035675,
         end: 1649918400,
         group_id: '00004'
     },
     {
-        id: 'item-0501',
+        id: '16',
         title: 'VERSION 0501',
         start: 1648935675,
         end: 1649935675,
         group_id: '00005'
     },
     {
-        id: 'item-0502',
+        id: '17',
         title: 'VERSION 0502',
         start: 1646035675,
         end: 1647018400,
         group_id: '00005'
     },
     {
-        id: 'item-0503',
+        id: '18',
         title: 'VERSION 0503',
         start: 1645035675,
         end: 1649018400,

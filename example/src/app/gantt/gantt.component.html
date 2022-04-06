@@ -42,19 +42,16 @@
 <div class="gantt-demo-content">
   <ngx-gantt
     #gantt
-    [start]="1514736000"
-    [end]="1609430400"
-    [groups]="groups"
+    [start]=""
+    [end]=""
     [items]="items"
     [viewType]="options.viewType"
     [draggable]="options.draggable"
     [linkable]="options.linkable"
     [async]="options.async"
-    [childrenResolve]="options.childrenResolve"
     (barClick)="barClick($event)"
     (lineClick)="lineClick($event)"
     (dragEnded)="dragEnded($event)"
-    (linkDragEnded)="linkDragEnded($event)"
     (loadOnScroll)="loadOnScroll($event)"
   >
     <ngx-gantt-table (columnChanges)="columnChanges($event)">
@@ -64,7 +61,7 @@
         </ng-template>
       </ngx-gantt-column>
       <ngx-gantt-column width="180px">
-        <ng-template #header> <span style="font-weight: bold">开始时间</span> </ng-template>
+        <ng-template #header> <span>开始时间</span> </ng-template>
         <ng-template #cell let-item="item">
           {{ item.start * 1000 | date: 'yyyy-MM-dd' }}
         </ng-template>

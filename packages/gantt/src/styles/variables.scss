@@ -11,14 +11,14 @@ $gantt-group-background-color: rgba(
   $alpha: 0.5
 ) !default;
 $gantt-group-height: 44px !default;
-$gantt-table-td-padding: 0 15px !default;
+$gantt-table-td-padding: 0 4px !default;
 
 // calendar
 $gantt-date-primary-color: #888 !default;
-$gantt-date-primary-font-size: 14px !default;
+$gantt-date-primary-font-size: 10px !default;
 $gantt-date-primary-border: #ddd !default;
 $gantt-date-secondary-color: #333 !default;
-$gantt-date-secondary-font-size: 14px !default;
+$gantt-date-secondary-font-size: 10px !default;
 $gantt-date-secondary-weekend-color: #aaa !default;
 $gantt-date-week-backdrop-bg: rgba(
   $color: #f3f3f3,
@@ -44,3 +44,5 @@ $gantt-link-line-color: #348fe4 !default;
 // table
 $gantt-table-header-drag-line-width: 3px !default;
 $gantt-table-header-drag-line-color: #348fe4 !default;
+$gantt-table-title-font-size: 10px !default;
+$gantt-table-body-font-size: 10px !default;

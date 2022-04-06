@@ -17,7 +17,7 @@
     }
     .today-line {
       position: absolute;
-      width: 3px;
+      width: 10px;
       background: $gantt-date-today-color;
       transform: scaleX(0.5);
       transform-origin: 100% 0;

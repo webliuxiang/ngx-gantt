@@ -3,10 +3,10 @@ import { eachWeekOfInterval, GanttDate } from '../utils/date';
 import { GanttView, GanttViewDate, GanttViewOptions, primaryDatePointTop, secondaryDatePointTop } from './view';
 
 const viewOptions: GanttViewOptions = {
-    cellWidth: 280,
+    cellWidth: 35,
     start: new GanttDate().startOfYear().startOfWeek({ weekStartsOn: 1 }),
     end: new GanttDate().endOfYear().endOfWeek({ weekStartsOn: 1 }),
-    addAmount: 1,
+    addAmount: 0,
     addUnit: 'month'
 };
 
@@ -39,11 +39,23 @@ export class GanttViewWeek extends GanttView {
             const increaseWeek = weekStart.getDaysInMonth() - weekStart.getDate() >= 3 ? 0 : 1;
             const point = new GanttDatePoint(
                 weekStart,
-                weekStart.addWeeks(increaseWeek).format('yyyy年'),
+                weekStart.addWeeks(increaseWeek).format('yyyy/MM'),
                 this.getCellWidth() / 2 + i * this.getCellWidth(),
                 primaryDatePointTop
             );
-            points.push(point);
+            let flag = false;
+            for (let index = 0; index < points.length; index++) {
+                const element = points[index];
+                if (element.text === point.text) {
+                    flag = true;
+                    element.start = point.start;
+                    element.x = point.x;
+                    element.y = point.y;
+                }
+            }
+            if (!flag) {
+                points.push(point);
+            }
         }
         return points;
     }
@@ -55,7 +67,7 @@ export class GanttViewWeek extends GanttView {
             const start = new GanttDate(weeks[i]);
             const point = new GanttDatePoint(
                 start,
-                `第${start.format('w')}周`,
+                `W${Number(start.format('w')) > 9 ? start.format('w') : '0' + start.format('w')}`,
                 i * this.getCellWidth() + this.getCellWidth() / 2,
                 secondaryDatePointTop
             );

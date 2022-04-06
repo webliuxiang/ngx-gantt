@@ -36,6 +36,15 @@ module.exports = {
             }
         },
         {
+            title: '测试',
+            path: 'test',
+            locales: {
+                'en-us': {
+                    title: 'Test'
+                }
+            }
+        },
+        {
             title: '配置',
             path: 'configuration',
             lib: 'ngx-gantt',

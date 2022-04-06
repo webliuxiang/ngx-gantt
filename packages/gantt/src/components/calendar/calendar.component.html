@@ -5,7 +5,7 @@
 
 <svg class="gantt-calendar-overlay-main" [attr.width]="view.width" [attr.height]="headerHeight">
   <g>
-    <text class="primary-text" *ngFor="let point of view.primaryDatePoints; trackBy: trackBy" [attr.x]="point.x" [attr.y]="point.y">
+    <text class="primary-text" *ngFor="let point of view.primaryDatePoints; trackBy: trackBy" [attr.x]="point.x - view.cellWidth/2" [attr.y]="point.y">
       {{ point.text }}
     </text>
     <ng-container *ngFor="let point of view.secondaryDatePoints; trackBy: trackBy">
@@ -17,10 +17,23 @@
     <g>
       <line
         *ngFor="let point of view.primaryDatePoints; let i = index; trackBy: trackBy"
-        [attr.x1]="(i + 1) * view.primaryWidth"
-        [attr.x2]="(i + 1) * view.primaryWidth"
+        [attr.x1]="point.x + view.cellWidth/2"
+        [attr.x2]="point.x + view.cellWidth/2"
         [attr.y1]="0"
-        [attr.y2]="mainHeight"
+        [attr.y2]="18"
+        class="primary-line"
+      ></line>
+    </g>
+    <!-- <g>
+      <line [attr.x1]="0" [attr.x2]="view.width" [attr.y1]="18" [attr.y2]="headerHeight - 18" class="header-line"></line>
+    </g> -->
+    <g>
+      <line
+        *ngFor="let point of view.primaryDatePoints; let i = index; trackBy: trackBy"
+        [attr.x1]="point.x + view.cellWidth/2"
+        [attr.x2]="point.x + view.cellWidth/2"
+        [attr.y1]="18"
+        [attr.y2]="mainHeight - 18"
         class="primary-line"
       ></line>
     </g>
@@ -41,8 +54,8 @@
       ></line>
       <line
         *ngFor="let point of view.primaryDatePoints; let i = index; trackBy: trackBy"
-        [attr.x1]="(i + 1) * view.primaryWidth"
-        [attr.x2]="(i + 1) * view.primaryWidth"
+        [attr.x1]="point.x + view.cellWidth/2"
+        [attr.x2]="point.x + view.cellWidth/2"
         [attr.y1]="0"
         [attr.y2]="mainHeight"
         class="primary-line"

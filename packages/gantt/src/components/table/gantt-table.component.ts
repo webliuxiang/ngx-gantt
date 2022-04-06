@@ -8,7 +8,9 @@ import {
     ViewChild,
     ElementRef,
     OnChanges,
-    SimpleChanges
+    SimpleChanges,
+    Output,
+    EventEmitter
 } from '@angular/core';
 import { GanttItemInternal, GanttGroupInternal } from '../../class';
 import { NgxGanttTableColumnComponent } from '../../table/gantt-column.component';
@@ -35,6 +37,8 @@ export class GanttTableComponent implements OnInit, OnChanges {
 
     @Input() items: GanttItemInternal[];
 
+    @Input() item: GanttItemInternal;
+
     @Input()
     set columns(columns: QueryList<NgxGanttTableColumnComponent>) {
         columns.forEach((column) => {
@@ -55,9 +59,15 @@ export class GanttTableComponent implements OnInit, OnChanges {
 
     @HostBinding('class.gantt-table-empty') ganttTableEmptyClass = false;
 
+    @Output() colClick = new EventEmitter();
+
+    @Output() colHover = new EventEmitter();
+
     constructor(public gantt: NgxGanttComponent, private elementRef: ElementRef) {}
 
-    ngOnInit() {}
+    ngOnInit() {
+        console.log(this.columnList);
+    }
 
     ngOnChanges(changes: SimpleChanges) {
         if (!changes.groups.currentValue?.length && !changes.items.currentValue?.length) {
@@ -155,5 +165,21 @@ export class GanttTableComponent implements OnInit, OnChanges {
 
     private hideAuxiliaryLine() {
         this.draglineElementRef.nativeElement.style.display = 'none';
+    }
+
+    formatData(item,type) {
+        let timeOut;
+
+        clearTimeout(timeOut);
+
+        timeOut = setTimeout(() => {
+            this.colHover.emit({item:item,type:type})
+        },100)
+    }
+
+    setColorBackground() {
+        const color = this.item.itemcolor;
+        const style: Partial<CSSStyleDeclaration> = this.item.itemStyle || {};
+        style.backgroundColor = this.item.itemcolor
     }
 }

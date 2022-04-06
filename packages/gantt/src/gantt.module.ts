@@ -33,7 +33,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
         NgxGanttRootComponent,
         IsGanttRangeItemPipe,
         IsGanttBarItemPipe,
-        IsGanttCustomItemPipe
+        IsGanttCustomItemPipe,
     ],
     providers: []
 })

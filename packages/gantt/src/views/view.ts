@@ -22,8 +22,8 @@ export interface GanttViewOptions {
 }
 
 const viewOptions: GanttViewOptions = {
-    min: new GanttDate().addYears(-1).startOfYear(),
-    max: new GanttDate().addYears(1).endOfYear()
+    min: new GanttDate().addYears(0).startOfYear(),
+    max: new GanttDate().addYears(0).endOfYear()
 };
 
 export abstract class GanttView {

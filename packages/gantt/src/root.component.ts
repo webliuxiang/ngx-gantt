@@ -28,6 +28,10 @@ export class NgxGanttRootComponent implements OnInit {
 
     @HostBinding('class.gantt') ganttClass = true;
 
+    @ContentChild('subsideTemplate', { static: true }) subsideTemplate: TemplateRef<any>;
+
+    @ContentChild('submainTemplate', { static: true }) submainTemplate: TemplateRef<any>;
+
     @ContentChild('sideTemplate', { static: true }) sideTemplate: TemplateRef<any>;
 
     @ContentChild('mainTemplate', { static: true }) mainTemplate: TemplateRef<any>;

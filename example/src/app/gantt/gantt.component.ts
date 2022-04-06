@@ -28,10 +28,10 @@ export class AppGanttExampleComponent implements OnInit {
     groups = mockGroups;
 
     options = {
-        viewType: GanttViewType.day,
-        draggable: true,
-        linkable: true,
-        async: true,
+        viewType: GanttViewType.week,
+        draggable: false,
+        linkable: false,
+        async: false,
         childrenResolve: this.getChildren.bind(this)
     };
 
@@ -55,18 +55,6 @@ export class AppGanttExampleComponent implements OnInit {
     dragEnded(event: GanttDragEvent) {
         this.items = [...this.items];
         this.groups = [...this.groups];
-    }
-
-    linkDragEnded(event: GanttLinkDragEvent) {
-        if (event.source.links && event.source.links.includes(event.target.id)) {
-            return;
-        }
-        this.items.forEach((item) => {
-            if (item.id === event.source.id) {
-                item.links = [...(item.links || []), event.target.id];
-            }
-        });
-        this.items = [...this.items];
     }
 
     loadOnScroll(event: GanttLoadOnScrollEvent) {}

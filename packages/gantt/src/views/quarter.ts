@@ -8,7 +8,7 @@ const viewOptions: GanttViewOptions = {
     end: new GanttDate().addYears(1).endOfYear(),
     min: new GanttDate().addYears(-2).startOfYear(),
     max: new GanttDate().addYears(2).endOfYear(),
-    cellWidth: 500,
+    cellWidth: 100,
     addAmount: 1,
     addUnit: 'year'
 };
@@ -41,8 +41,8 @@ export class GanttViewQuarter extends GanttView {
             const start = new GanttDate(years[i]);
             const point = new GanttDatePoint(
                 start,
-                `${start.format('yyyy')}年`,
-                (this.getCellWidth() * 4) / 2 + i * (this.getCellWidth() * 4),
+                `${start.format('yyyy')}`,
+                (this.getCellWidth() * 4) - (this.getCellWidth() / 2) + i * (this.getCellWidth() * 4),
                 primaryDatePointTop
             );
             points.push(point);
