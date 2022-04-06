@@ -1,3 +1,7 @@
+# Base Version
+
+v11.0.0
+
 # ngx-gantt
 
 [![CircleCI](https://circleci.com/gh/worktile/ngx-gantt.svg?style=shield)](https://circleci.com/gh/worktile/ngx-gantt)
