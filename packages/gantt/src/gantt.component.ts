@@ -133,6 +133,19 @@ export class NgxGanttComponent extends GanttUpper implements OnInit, AfterViewIn
         this.ganttMain.scrollCenter(item);
     }
 
+    // // mousedown
+    // mainMouseDown(e) {
+    //     this.ganttMain.mainMouseDown(e);
+    // }
+    // // mouseenter
+    // mainMouseEnter(e) {
+    //     this.ganttMain.mainMouseEnter(e);
+    // }
+    // // mouseup
+    // mainMouseUp(e) {
+    //     this.ganttMain.mainMouseUp(e);
+    // }
+
     colHover(item) {
         // console.log("这是父组件的hover事件");
         if (item.type) {

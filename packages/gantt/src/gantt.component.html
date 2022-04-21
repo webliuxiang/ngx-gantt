@@ -1,8 +1,8 @@
 <div style="width: 100%; height: 100%;">
   <div>
     <ngx-gantt-root>
-      <ng-template #sideTemplate>
-        <gantt-table [groups]="groups" [items]="items" [columns]="columns" [groupTemplate]="groupTemplate" [emptyTemplate]="tableEmptyTemplate" (colClick)="colClick($event)" (colHover)="colHover($event)"></gantt-table>
+      <ng-template #sideTemplate> 
+        <gantt-table [groups]="groups" [items]="items" [titles]="titles" [columns]="columns" [groupTemplate]="groupTemplate" [emptyTemplate]="tableEmptyTemplate" (colClick)="colClick($event)" (colHover)="colHover($event)"></gantt-table>
       </ng-template>
       <ng-template #mainTemplate>
         <gantt-main

@@ -22,6 +22,13 @@ import { delay } from 'rxjs/operators';
 export class AppGanttRangeExampleComponent implements OnInit {
     items = mockItems;
 
+    titlesList = [
+        {
+            key: "CreateTime",
+            value: "2022"
+        }
+    ];
+
     options = {
         viewType: GanttViewType.month,
         draggable: true,

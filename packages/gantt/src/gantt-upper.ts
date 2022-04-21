@@ -35,6 +35,8 @@ import { GanttDragContainer } from './gantt-drag-container';
 @Directive()
 export abstract class GanttUpper {
     @Input('items') originItems: GanttItem[] = [];
+    // TODO:
+    @Input('titles') originTitles: [] = [];
 
     @Input('groups') originGroups: GanttGroup[] = [];
 
@@ -79,6 +81,8 @@ export abstract class GanttUpper {
     public view: GanttView;
 
     public items: GanttItemInternal[] = [];
+    // TODO:
+    public titles: [] = [];
 
     public groups: GanttGroupInternal[] = [];
 
@@ -123,6 +127,7 @@ export abstract class GanttUpper {
 
     private setupItems() {
         this.items = [];
+        this.titles = this.originTitles;
         this.originItems = uniqBy(this.originItems, 'id');
         // 根据上一次数据展开状态同步新的数据展开状态
         this.originItems.forEach((item) => {

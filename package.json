@@ -1,5 +1,5 @@
 {
-  "name": "@worktile/gantt",
+  "name": "gantt",
   "version": "11.0.0",
   "description": "A modern and powerful gantt chart component for Angular",
   "keywords": [
@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "ng": "ng",
-    "start": "docgeni serve",
+    "start": "docgeni serve   --host 0.0.0.0 --port 4201 -o   ",
     "build:docs": "docgeni build",
     "build": "npm run build:lib && npm run build:lib:scss",
     "build:lib": "ng build gantt --prod",

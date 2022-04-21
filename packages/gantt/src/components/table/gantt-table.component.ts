@@ -37,6 +37,8 @@ export class GanttTableComponent implements OnInit, OnChanges {
 
     @Input() items: GanttItemInternal[];
 
+    @Input() titles: [];
+
     @Input() item: GanttItemInternal;
 
     @Input()
@@ -66,7 +68,9 @@ export class GanttTableComponent implements OnInit, OnChanges {
     constructor(public gantt: NgxGanttComponent, private elementRef: ElementRef) {}
 
     ngOnInit() {
-        console.log(this.columnList);
+        // console.log(this.columnList);
+        // console.log(this.items);
+        // console.log(this.titles);
     }
 
     ngOnChanges(changes: SimpleChanges) {

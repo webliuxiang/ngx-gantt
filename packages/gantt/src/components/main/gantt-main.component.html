@@ -33,3 +33,16 @@
     ></ng-template>
   </ng-container>
 </ng-template>
+<div
+  class="vir-box"
+  id="virtualBox"
+  #virtualBox
+  [style.width.px]="ganttUpper.view.width"
+  [style.height.px]="ganttUpper.styles.lineHeight * items.length"
+  style="position: absolute; top: 0; left: 0"
+  cdkDrag
+  cdkDragLockAxis="x"
+  (cdkDragMoved)="mainMouseEnter($event)"
+  (cdkDragStarted)="mainMouseDown($event)"
+  (cdkDragEnded)="mainMouseUp($event)"
+></div>
