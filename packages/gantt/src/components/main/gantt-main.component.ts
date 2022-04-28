@@ -76,7 +76,7 @@ export class GanttMainComponent implements OnInit {
         }
          
         if (this.flag) return;
-        this.root.scrollLeft -= e.distance.x/2;
+        this.root.scrollLeft -= e.distance.x/15;
         
     }
     // mouseup

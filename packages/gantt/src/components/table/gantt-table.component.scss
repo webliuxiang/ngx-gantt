@@ -65,7 +65,7 @@
   }
 
   .gantt-table-header {
-    text-align: center;
+    // text-align: center;
     position: sticky;
     top: 0;
     z-index: 2;
@@ -73,7 +73,12 @@
     line-height: $gantt-header-height;
 
     .gantt-table-column {
+      padding: $gantt-table-td-padding;
+      padding-right: 12px;
       font-weight: 400;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
   }
 
@@ -107,13 +112,14 @@
       &-with-group {
         .gantt-table-column {
           &:first-child {
-            padding: 0 15px 0 32px;
+            // padding: 0 15px 0 32px;
           }
         }
       }
 
       .gantt-table-column {
         display: flex;
+        // padding: $gantt-table-td-padding;
         padding: $gantt-table-td-padding;
 
         &:last-child {

@@ -92,7 +92,7 @@
       [style.background]="item.itemcolor"
     >
       <div class="gantt-table-column" *ngFor="let column of columnList; let first = first" [style.width]="column.columnWidth">
-        <div *ngIf="first" class="gantt-expand-icon" [style.marginLeft.px]="level * 20">
+        <!-- <div *ngIf="first" class="gantt-expand-icon" [style.marginLeft.px]="level * 20">
           <ng-container *ngIf="level < gantt.maxLevel - 1 && item.expandable">
             <gantt-icon
               *ngIf="!item.loading"
@@ -102,7 +102,7 @@
             ></gantt-icon>
             <gantt-icon *ngIf="item.loading" [iconName]="'loading'"></gantt-icon>
           </ng-container>
-        </div>
+        </div> -->
         <div class="gantt-table-column-content">
           <ng-template
             [ngTemplateOutlet]="column.templateRef"

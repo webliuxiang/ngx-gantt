@@ -28,7 +28,7 @@ import { coerceCssPixelValue } from '@angular/cdk/coercion';
 import { NgxGanttTableComponent } from './table/gantt-table.component';
 
 export const defaultColumnWidth = 100;
-export const minColumnWidth = 40;
+export const minColumnWidth = 20;
 
 @Component({
     selector: 'ngx-gantt',
