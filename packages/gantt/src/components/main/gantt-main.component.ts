@@ -9,6 +9,8 @@ import { GANTT_UPPER_TOKEN, GanttUpper } from '../../gantt-upper';
 export class GanttMainComponent implements OnInit {
     public root: Element;
     public virtualDom: Element;
+    public startMove: number = 0;
+    public endMove: number = 0;
 
     @Input() groups: GanttGroupInternal[];
 
@@ -37,7 +39,6 @@ export class GanttMainComponent implements OnInit {
 
     ngOnInit() {
         this.getRootDom(this.elementRef);
-        // this.getRootDom2(this.elementRef);
     }
 
     trackBy(item: GanttGroupInternal | GanttItemInternal, index: number) {
@@ -53,7 +54,8 @@ export class GanttMainComponent implements OnInit {
         this.root = root.nativeElement;
         // console.log('获取gantt-main-container的DOM对象');
     }
-    getRootDom2(root: ElementRef) {
+    // 每次移动后都要把 vir-box 元素重置
+    resetVirBoxDom(root: ElementRef) {
         root.nativeElement.querySelector('.vir-box').style.transform = "translate3d(0px, 0px, 0px)"
         // console.log('获取gantt-main-container的DOM对象');
     }
@@ -64,6 +66,7 @@ export class GanttMainComponent implements OnInit {
     }
     // mouseenter
     mainMouseEnter(e) {
+        this.startMove = e.distance.x;
         let boxWidth = this.virtualBox.nativeElement.style.width.split("px")[0]*1;
         let clientWidth = this.root.clientWidth;
         let scrollWidth = boxWidth - clientWidth;
@@ -76,13 +79,20 @@ export class GanttMainComponent implements OnInit {
         }
          
         if (this.flag) return;
-        this.root.scrollLeft -= e.distance.x/15;
+        // this.root.scrollLeft -= e.distance.x/15;
+        let moveDistance = this.startMove - this.endMove;
+        
+        this.root.scrollLeft -= moveDistance;
+        
+        this.endMove = this.startMove;
         
     }
     // mouseup
     mainMouseUp(e) {
-        this.getRootDom2(this.elementRef);
+        this.resetVirBoxDom(this.elementRef);
         this.flag = false;
+        this.startMove = 0;
+        this.endMove = 0;
     }
 
     addGanttItemHoverStyle(className) {

@@ -1,7 +1,8 @@
 <div class="gantt-table-header gantt-table-row">
-  <div *ngFor="let title of titles; let i = index">
-    <span>{{ title.key }}</span
-    ><span>{{ title.value }}</span>
+  <div class="table-title" *ngFor="let title of titles; let i = index">
+    <span style="margin: 0 5px;">{{ title.key }}</span>
+    <span style="margin: 0 5px;" *ngIf="title.value && title.value !== ''">:</span>
+    <span style="margin: 0 5px;">{{ title.value }}</span>
   </div>
 </div>
 <div class="gantt-table-header gantt-table-row">

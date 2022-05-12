@@ -25,6 +25,10 @@ export class AppGanttRangeExampleComponent implements OnInit {
     titlesList = [
         {
             key: "CreateTime",
+            value: ""
+        },
+        {
+            key: "CreateTime",
             value: "2022"
         }
     ];

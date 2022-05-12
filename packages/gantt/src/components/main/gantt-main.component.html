@@ -38,8 +38,7 @@
   id="virtualBox"
   #virtualBox
   [style.width.px]="ganttUpper.view.width"
-  [style.height.px]="ganttUpper.styles.lineHeight * items.length"
-  style="position: absolute; top: 0; left: 0"
+  style="position: absolute; top: 0; left: 0;height: calc(100% + 17px);"
   cdkDrag
   cdkDragLockAxis="x"
   (cdkDragMoved)="mainMouseEnter($event)"
