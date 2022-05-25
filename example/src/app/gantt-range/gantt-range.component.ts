@@ -40,18 +40,30 @@ export class AppGanttRangeExampleComponent implements OnInit {
         childrenResolve: this.getChildren.bind(this)
     };
 
-    viewOptions: GanttViewOptions = {
-        start: new GanttDate(new Date('2020-3-1')),
-        end: new GanttDate(new Date('2020-6-30'))
-    };
+    // viewOptions: GanttViewOptions = {
+    //     start: new GanttDate(new Date('2020-3-1')),
+    //     end: new GanttDate(new Date('2020-6-30'))
+    // };
 
     @HostBinding('class.gantt-demo') class = true;
 
     constructor(private printService: GanttPrintService) {}
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        // document.oncontextmenu =function () {return false; };
+    }
 
     barClick(event: GanttBarClickEvent) {
+        console.log(event);
+    }
+    oncontextmenuClick(event) {
+        console.log(event.pointerType);
+        
+        console.log(1111);
+        console.log(event);
+    }
+    doubleClick(event: GanttBarClickEvent) {
+        console.log('right-Click');
         console.log(event);
     }
 

@@ -24,7 +24,8 @@
         <ng-template [ngTemplateOutlet]="itemTemplate" [ngTemplateOutletContext]="{ item: item.origin, refs: item.refs }"></ng-template>
       </ng-container>
       <gantt-range *ngIf="item.type | isGanttRangeItem" [template]="rangeTemplate" [item]="item"></gantt-range>
-      <gantt-bar *ngIf="item.type | isGanttBarItem" [item]="item" [template]="barTemplate" (barClick)="barClick.emit($event)"></gantt-bar>
+      <gantt-bar *ngIf="item.type | isGanttBarItem" [item]="item" [template]="barTemplate" (contextmenu)="contextmenu.emit($event)" (barClick)="barClick.emit($event)" (doubleClick)="doubleClick.emit($event)"></gantt-bar>
+      <gantt-bar *ngIf="item.type | isGanttBarItem" [item]="item" [template]="barTemplate" (contextmenu)="contextmenu.emit($event)" (barClick)="barClick.emit($event)" (doubleClick)="doubleClick.emit($event)"></gantt-bar>
     </div>
     <ng-template
       *ngIf="item.children && item.expanded"

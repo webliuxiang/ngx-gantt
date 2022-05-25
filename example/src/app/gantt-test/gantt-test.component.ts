@@ -47,9 +47,14 @@ export class GanttTestComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  barClick(event: GanttBarClickEvent) {
-      console.log(event);
-  }
+//   barClick(event: GanttBarClickEvent) {
+//       console.log(event);
+//   }
+
+  doubleClick(event: GanttBarClickEvent) {
+    console.log('right-Click');
+    console.log(event);
+}
 
   lineClick(event: GanttLineClickEvent) {
       console.log(event);

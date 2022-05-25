@@ -64,6 +64,10 @@ export abstract class GanttUpper {
 
     @Output() barClick = new EventEmitter<GanttBarClickEvent>();
 
+    @Output() contextmenu = new EventEmitter<GanttBarClickEvent>();
+
+    @Output() doubleClick = new EventEmitter<GanttBarClickEvent>();
+
     @ContentChild('bar', { static: true }) barTemplate: TemplateRef<any>;
 
     @ContentChild('range', { static: true }) rangeTemplate: TemplateRef<any>;

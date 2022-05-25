@@ -50,6 +50,8 @@ export class AppGanttFlatComponent extends GanttUpper implements OnInit, OnChang
         this.dragEnded.pipe(startWith(null), takeUntil(this.unsubscribe$)).subscribe(() => {
             this.buildGroupItems();
         });
+        console.log(this.groups);
+        
     }
 
     private buildGroupItems() {

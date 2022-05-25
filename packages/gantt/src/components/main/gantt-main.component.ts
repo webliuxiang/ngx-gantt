@@ -26,6 +26,10 @@ export class GanttMainComponent implements OnInit {
 
     @Output() barClick = new EventEmitter<GanttBarClickEvent>();
 
+    @Output() contextmenu = new EventEmitter<GanttBarClickEvent>();
+
+    @Output() doubleClick = new EventEmitter<GanttBarClickEvent>();
+
     @Output() lineClick = new EventEmitter<GanttLineClickEvent>();
 
     @HostBinding('class.gantt-main-container') ganttMainClass = true;

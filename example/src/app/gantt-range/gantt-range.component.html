@@ -29,12 +29,16 @@
       <button (click)="print('gantt-range')">导出为图片</button>
     </span>
   </div>
+  <div class="header-section">
+    <span class="header-section-content">
+      <button (contextmenu)="oncontextmenuClick($event)">导出为图片</button>
+    </span>
+  </div>
 </div>
 <div class="gantt-demo-content">
   <ngx-gantt
     #gantt
-    start="1514736000"
-    end="1609430400"
+    
     [items]="items"
     [titles]="titlesList"
     [viewType]="options.viewType"
@@ -42,6 +46,8 @@
     [async]="options.async"
     [childrenResolve]="options.childrenResolve"
     (barClick)="barClick($event)"
+    (doubleClick)="doubleClick($event)"
+    (contextmenu)="oncontextmenuClick($event)"
     (dragEnded)="dragEnded($event)"
     (loadOnScroll)="loadOnScroll($event)"
   >

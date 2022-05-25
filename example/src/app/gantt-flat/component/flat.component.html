@@ -8,6 +8,29 @@
         </div>
       </div>
     </div>
+    <!-- <ng-template *ngFor="let group of groups; trackBy: trackBy"> -->
+
+      <!-- <table>
+        <thead>
+          <tr>
+            <td>ID</td>
+            <td>title</td>
+            <td>start</td>
+            <td>group id</td>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let group of groups; trackBy: trackBy">
+            <tr *ngFor="let item of group.items">
+              <td>{{item.origin.id}}</td>
+              <td>{{item.origin.title}}</td>
+              <td>{{item.origin.start}}</td>
+              <td>{{item.origin.group_id}}</td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table> -->
+    <!-- </ng-template> -->
   </ng-template>
   <ng-template #mainTemplate>
     <div class="gantt-main-container">
