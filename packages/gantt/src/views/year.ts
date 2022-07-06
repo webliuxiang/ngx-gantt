@@ -8,7 +8,8 @@ const viewOptions: GanttViewOptions = {
     start: new GanttDate().addYears(-1).startOfYear(),
     end: new GanttDate().addYears(1).endOfYear(),
     addAmount: 1,
-    addUnit: 'year'
+    addUnit: 'year',
+    viewType: 'year'
 };
 
 export class GanttViewYear extends GanttView {

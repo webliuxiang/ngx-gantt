@@ -1,6 +1,7 @@
 import { GanttDate, differenceInDays, GanttDateUtil } from '../utils/date';
 import { GanttDatePoint } from '../class/date-point';
 import { BehaviorSubject } from 'rxjs';
+import { GanttViewType } from '../class/view-type';
 
 export const primaryDatePointTop = 18;
 
@@ -19,6 +20,7 @@ export interface GanttViewOptions {
     cellWidth?: number;
     addAmount?: number;
     addUnit?: GanttDateUtil;
+    viewType?: string;
 }
 
 const viewOptions: GanttViewOptions = {

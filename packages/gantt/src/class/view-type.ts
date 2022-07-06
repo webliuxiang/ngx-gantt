@@ -1,7 +1,8 @@
 export enum GanttViewType {
-    day = 'day',
+    year = 'year',
     quarter = 'quarter',
     month = 'month',
-    year = 'year',
-    week = 'week'
+    week = 'week',
+    day = 'day',
+    hour = 'hour',
 }

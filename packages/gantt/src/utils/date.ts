@@ -5,6 +5,7 @@ import {
     addWeeks,
     addQuarters,
     getUnixTime,
+    startOfHour,
     startOfDay,
     startOfWeek,
     startOfMonth,
@@ -30,7 +31,9 @@ import {
     differenceInCalendarQuarters,
     eachMonthOfInterval,
     eachWeekOfInterval,
-    eachDayOfInterval
+    eachDayOfInterval,
+    eachHourOfInterval,
+    differenceInHours
 } from 'date-fns';
 
 export {
@@ -42,6 +45,7 @@ export {
     getUnixTime,
     startOfDay,
     startOfWeek,
+    startOfHour,
     startOfMonth,
     startOfQuarter,
     startOfYear,
@@ -65,7 +69,9 @@ export {
     differenceInCalendarQuarters,
     eachMonthOfInterval,
     eachWeekOfInterval,
-    eachDayOfInterval
+    eachDayOfInterval,
+    eachHourOfInterval,
+    differenceInHours
 } from 'date-fns';
 
 export type GanttDateUtil = 'second' | 'minute' | 'hour' | 'day' | 'week' | 'month' | 'quarter' | 'year';
@@ -209,6 +215,10 @@ export class GanttDate {
         return new GanttDate(addYears(this.value, amount));
     }
 
+    startOfHour(): GanttDate {
+        return new GanttDate(startOfHour(this.value));
+    }
+    
     startOfDay(): GanttDate {
         return new GanttDate(startOfDay(this.value));
     }
