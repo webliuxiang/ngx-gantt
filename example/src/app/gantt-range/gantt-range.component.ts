@@ -34,7 +34,7 @@ export class AppGanttRangeExampleComponent implements OnInit {
     ];
 
     options = {
-        viewType: GanttViewType.month,
+        viewType: GanttViewType.hour,
         draggable: true,
         async: true,
         childrenResolve: this.getChildren.bind(this)

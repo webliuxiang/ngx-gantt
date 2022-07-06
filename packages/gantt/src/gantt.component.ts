@@ -49,6 +49,13 @@ export class NgxGanttComponent extends GanttUpper implements OnInit, AfterViewIn
     @Input() childrenResolve: (GanttItem) => Observable<GanttItem[]>;
 
     @Input() linkable: boolean;
+    /**
+     * 显示类型: 
+     * all:实际和计划同时展示
+     * plan:只展示计划
+     * actual:只展示实际
+     */
+    @Input() visibleType: string = 'plan';
 
     @Output() linkDragStarted = new EventEmitter<GanttLinkDragEvent>();
 

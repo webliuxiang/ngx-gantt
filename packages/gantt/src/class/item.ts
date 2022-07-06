@@ -6,6 +6,9 @@ interface GanttItemRefs {
     width: number;
     x: number;
     y: number;
+    ac_width: number;
+    ac_x: number;
+    ac_y: number;
 }
 
 export enum GanttItemType {
@@ -19,6 +22,8 @@ export interface GanttItem<T = unknown> {
     title: string;
     start?: number;
     end?: number;
+    ac_start?: number;
+    ac_end?: number;
     group_id?: string;
     links?: string[];
     draggable?: boolean;
@@ -27,12 +32,14 @@ export interface GanttItem<T = unknown> {
     expanded?: boolean;
     children?: GanttItem[];
     color?: string;
+    ac_color?: string;
     itemcolor?: string;
     itemStyle?: Partial<CSSStyleDeclaration>;
     barStyle?: Partial<CSSStyleDeclaration>;
     origin?: T;
     type?: GanttItemType;
     progress?: number;
+    ac_progress?: number;
 }
 
 export class GanttItemInternal {
@@ -40,8 +47,11 @@ export class GanttItemInternal {
     title: string;
     start: GanttDate;
     end: GanttDate;
+    ac_start: GanttDate;
+    ac_end: GanttDate;
     links: string[];
     color?: string;
+    ac_color?: string;
     itemcolor?: string;
     itemStyle?: Partial<CSSStyleDeclaration>;
     barStyle?: Partial<CSSStyleDeclaration>;
@@ -54,19 +64,22 @@ export class GanttItemInternal {
     children: GanttItemInternal[];
     type?: GanttItemType;
     progress?: number;
+    ac_progress?: number;
     viewType?: GanttViewType;
+    visibleType?: string;
 
     get refs() {
         return this.refs$.getValue();
     }
 
-    refs$ = new BehaviorSubject<{ width: number; x?: number; y?: number }>(null);
+    refs$ = new BehaviorSubject<{ width: number; x?: number; y?: number, ac_width: number; ac_x?: number; ac_y?: number }>(null);
 
     constructor(item: GanttItem, options?: { viewType: GanttViewType }) {
         this.origin = item;
         this.id = this.origin.id;
         this.links = this.origin.links || [];
         this.color = this.origin.color;
+        this.ac_color = this.origin.ac_color;
         this.itemcolor = this.origin.itemcolor;
         this.itemStyle = this.origin.itemStyle;
         this.barStyle = this.origin.barStyle;
@@ -76,12 +89,15 @@ export class GanttItemInternal {
         this.expanded = this.origin.expanded === undefined ? false : this.origin.expanded;
         this.start = item.start ? new GanttDate(item.start) : null;
         this.end = item.end ? new GanttDate(item.end) : null;
+        this.ac_start = item.ac_start ? new GanttDate(item.ac_start) : null;
+        this.ac_end = item.ac_end ? new GanttDate(item.ac_end) : null;
         this.viewType = options && options.viewType ? options.viewType : GanttViewType.month;
         this.children = (item.children || []).map((subItem) => {
             return new GanttItemInternal(subItem, { viewType: this.viewType });
         });
         this.type = this.origin.type || GanttItemType.bar;
         this.progress = this.origin.progress;
+        this.ac_progress = this.origin.ac_progress;
         // fill one month when start or end is null
         this.fillItemStartOrEnd(item);
     }
@@ -103,6 +119,13 @@ export class GanttItemInternal {
         if (!item.start && item.end) {
             this.start = new GanttDate(item.end).addDays(-addInterval).startOfDay();
         }
+        // actual
+        if (item.ac_start && !item.ac_end) {
+            this.ac_end = new GanttDate(item.ac_start).addDays(addInterval).endOfDay();
+        }
+        if (!item.ac_start && item.ac_end) {
+            this.ac_start = new GanttDate(item.ac_end).addDays(-addInterval).startOfDay();
+        }
     }
 
     updateRefs(refs: GanttItemRefs) {
@@ -114,6 +137,13 @@ export class GanttItemInternal {
         this.end = end.endOfDay();
         this.origin.start = this.start.getUnixTime();
         this.origin.end = this.end.getUnixTime();
+    }
+    // actual
+    updateDateActual(start: GanttDate, end: GanttDate) {
+        this.ac_start = start.startOfDay();
+        this.ac_end = end.endOfDay();
+        this.origin.ac_start = this.ac_start.getUnixTime();
+        this.origin.ac_end = this.ac_end.getUnixTime();
     }
 
     addChildren(items: GanttItem[]) {

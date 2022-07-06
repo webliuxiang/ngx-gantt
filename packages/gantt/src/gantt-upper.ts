@@ -266,7 +266,10 @@ export abstract class GanttUpper {
             item.updateRefs({
                 width: item.start && item.end ? this.view.getDateRangeWidth(item.start.startOfDay(), item.end.endOfDay()) : 0,
                 x: item.start ? this.view.getXPointByDate(item.start) : 0,
-                y: (this.styles.lineHeight - this.styles.barHeight) / 2 - 1
+                y: (this.styles.lineHeight - this.styles.barHeight) / 2 - 1,
+                ac_width: item.ac_start && item.ac_end ? this.view.getDateRangeWidth(item.ac_start.startOfDay(), item.ac_end.endOfDay()) : 0,
+                ac_x: item.ac_start ? this.view.getXPointByDate(item.ac_start) : 0,
+                ac_y: (this.styles.lineHeight - this.styles.barHeight) / 2 - 1,
             });
         });
     }

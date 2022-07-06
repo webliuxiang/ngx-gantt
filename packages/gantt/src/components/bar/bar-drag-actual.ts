@@ -19,7 +19,7 @@ function createSvgElement(qualifiedName: string, className: string) {
 }
 
 @Injectable()
-export class GanttBarDrag implements OnDestroy {
+export class GanttBarActualDrag implements OnDestroy {
     private ganttUpper: GanttUpper;
 
     private barElement: HTMLElement;
@@ -78,17 +78,17 @@ export class GanttBarDrag implements OnDestroy {
             this.dragContainer.dragStarted.emit({ item: this.item.origin });
         });
         dragRef.moved.subscribe((event) => {
-            const x = this.item.refs.x + event.distance.x;
-            const days = differenceInCalendarDays(this.item.end.value, this.item.start.value);
+            const x = this.item.refs.ac_x + event.distance.x;
+            const days = differenceInCalendarDays(this.item.ac_end.value, this.item.ac_start.value);
             const start = this.ganttUpper.view.getDateByXPoint(x);
             const end = start.addDays(days);
             this.openDragBackdrop(this.barElement, this.ganttUpper.view.getDateByXPoint(x), end);
         });
         dragRef.ended.subscribe((event) => {
-            const days = differenceInCalendarDays(this.item.end.value, this.item.start.value);
-            const start = this.ganttUpper.view.getDateByXPoint(this.item.refs.x + event.distance.x);
+            const days = differenceInCalendarDays(this.item.ac_end.value, this.item.ac_start.value);
+            const start = this.ganttUpper.view.getDateByXPoint(this.item.refs.ac_x + event.distance.x);
             const end = start.addDays(days);
-            this.item.updateDate(start, end);
+            this.item.updateDateActual(start, end);
             this.clearDraggingStyles();
             this.closeDragBackdrop();
             event.source.reset();
@@ -101,7 +101,6 @@ export class GanttBarDrag implements OnDestroy {
     private createBarHandleDrags() {
         const dragRefs = [];
         const handles = this.barElement.querySelectorAll<HTMLElement>('.drag-handles .handle');
-        
         handles.forEach((handle, index) => {
             const isBefore = index === 0;
             const dragRef = this.dragDrop.createDrag(handle);
@@ -115,8 +114,8 @@ export class GanttBarDrag implements OnDestroy {
 
             dragRef.moved.subscribe((event) => {
                 if (isBefore) {
-                    const x = this.item.refs.x + event.distance.x;
-                    const width = this.item.refs.width + event.distance.x * -1;
+                    const x = this.item.refs.ac_x + event.distance.x;
+                    const width = this.item.refs.ac_width + event.distance.x * -1;
                     if (width > dragMinWidth) {
                         this.barElement.style.width = width + 'px';
                         this.barElement.style.left = x + 'px';
@@ -127,13 +126,13 @@ export class GanttBarDrag implements OnDestroy {
                         );
                     }
                 } else {
-                    const width = this.item.refs.width + event.distance.x;
+                    const width = this.item.refs.ac_width + event.distance.x;
                     if (width > dragMinWidth) {
                         this.barElement.style.width = width + 'px';
                         this.openDragBackdrop(
                             this.barElement,
-                            this.ganttUpper.view.getDateByXPoint(this.item.refs.x),
-                            this.ganttUpper.view.getDateByXPoint(this.item.refs.x + width)
+                            this.ganttUpper.view.getDateByXPoint(this.item.refs.ac_x),
+                            this.ganttUpper.view.getDateByXPoint(this.item.refs.ac_x + width)
                         );
                     }
                 }
@@ -142,21 +141,21 @@ export class GanttBarDrag implements OnDestroy {
 
             dragRef.ended.subscribe((event) => {
                 if (isBefore) {
-                    const width = this.item.refs.width + event.distance.x * -1;
+                    const width = this.item.refs.ac_width + event.distance.x * -1;
                     if (width > dragMinWidth) {
-                        this.item.updateDate(this.ganttUpper.view.getDateByXPoint(this.item.refs.x + event.distance.x), this.item.end);
+                        this.item.updateDateActual(this.ganttUpper.view.getDateByXPoint(this.item.refs.ac_x + event.distance.x), this.item.ac_end);
                     } else {
-                        this.item.updateDate(this.item.end.startOfDay(), this.item.end);
+                        this.item.updateDateActual(this.item.ac_end.startOfDay(), this.item.ac_end);
                     }
                 } else {
-                    const width = this.item.refs.width + event.distance.x;
+                    const width = this.item.refs.ac_width + event.distance.x;
                     if (width > dragMinWidth) {
-                        this.item.updateDate(
-                            this.item.start,
-                            this.ganttUpper.view.getDateByXPoint(this.item.refs.x + this.item.refs.width + event.distance.x)
+                        this.item.updateDateActual(
+                            this.item.ac_start,
+                            this.ganttUpper.view.getDateByXPoint(this.item.refs.ac_x + this.item.refs.ac_width + event.distance.x)
                         );
                     } else {
-                        this.item.updateDate(this.item.start, this.item.start.endOfDay());
+                        this.item.updateDateActual(this.item.ac_start, this.item.ac_start.endOfDay());
                     }
                 }
                 this.clearDraggingStyles();
@@ -232,7 +231,7 @@ export class GanttBarDrag implements OnDestroy {
 
     private setDraggingStyles() {
         this.barElement.style.pointerEvents = 'none';
-        this.barElement.style.zIndex = '9999';
+        this.barElement.style.zIndex = '999';
         this.barElement.classList.add('gantt-bar-draggable-drag');
     }
 
@@ -272,7 +271,6 @@ export class GanttBarDrag implements OnDestroy {
     }
 
     createDrags(elementRef: ElementRef, item: GanttItemInternal, ganttUpper: GanttUpper) {
-        
         this.item = item;
         this.barElement = elementRef.nativeElement;
         this.ganttUpper = ganttUpper;

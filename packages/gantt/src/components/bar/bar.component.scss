@@ -167,3 +167,6 @@ $gantt-bar-link-drop-border: 5px;
         }
     }
 }
+.gantt-bar:hover {
+    z-index: 999;
+}

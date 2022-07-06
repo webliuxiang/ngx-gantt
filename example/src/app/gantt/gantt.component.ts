@@ -28,8 +28,8 @@ export class AppGanttExampleComponent implements OnInit {
     groups = mockGroups;
 
     options = {
-        viewType: GanttViewType.week,
-        draggable: false,
+        viewType: GanttViewType.hour,
+        draggable: true,
         linkable: false,
         async: false,
         childrenResolve: this.getChildren.bind(this)

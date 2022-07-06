@@ -5,7 +5,10 @@ import { NgxGanttTableComponent } from './table/gantt-table.component';
 import { NgxGanttTableColumnComponent } from './table/gantt-column.component';
 import { GanttCalendarComponent } from './components/calendar/calendar.component';
 import { GanttTableComponent } from './components/table/gantt-table.component';
+
 import { NgxGanttBarComponent } from './components/bar/bar.component';
+import { NgxGanttBarActualComponent } from './components/bar/bar-actual.component';
+
 import { GanttMainComponent } from './components/main/gantt-main.component';
 import { GanttIconComponent } from './components/icon/icon.component';
 import { GanttDragBackdropComponent } from './components/drag-backdrop/drag-backdrop.component';
@@ -17,7 +20,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
     imports: [CommonModule, DragDropModule],
-    exports: [NgxGanttComponent, NgxGanttTableComponent, NgxGanttTableColumnComponent, NgxGanttRootComponent, NgxGanttBarComponent],
+    exports: [NgxGanttComponent, NgxGanttTableComponent, NgxGanttTableColumnComponent, NgxGanttRootComponent, NgxGanttBarComponent, NgxGanttBarActualComponent],
     declarations: [
         NgxGanttComponent,
         NgxGanttTableComponent,
@@ -27,6 +30,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
         GanttCalendarComponent,
         GanttLinksComponent,
         NgxGanttBarComponent,
+        NgxGanttBarActualComponent,
         GanttIconComponent,
         GanttDragBackdropComponent,
         NgxGanttRangeComponent,

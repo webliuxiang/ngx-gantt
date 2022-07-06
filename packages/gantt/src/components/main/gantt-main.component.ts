@@ -23,6 +23,8 @@ export class GanttMainComponent implements OnInit {
     @Input() barTemplate: TemplateRef<any>;
 
     @Input() rangeTemplate: TemplateRef<any>;
+    
+    @Input() visibleType: string;
 
     @Output() barClick = new EventEmitter<GanttBarClickEvent>();
 

@@ -2,6 +2,7 @@
   <div class="header-section">
     <span class="header-section-title">视图：</span>
     <span class="header-section-content">
+      <input id="hour" type="radio" value="hour" name="view-type" [(ngModel)]="options.viewType" /> <label for="hour">时</label>
       <input id="day" type="radio" value="day" name="view-type" [(ngModel)]="options.viewType" /> <label for="day">日</label>
       <input id="month" type="radio" value="month" name="view-type" [(ngModel)]="options.viewType" /> <label for="month">月</label>
       <input id="quarter" type="radio" value="quarter" name="view-type" [(ngModel)]="options.viewType" /> <label for="quarter">季度</label>
@@ -43,6 +44,7 @@
     [titles]="titlesList"
     [viewType]="options.viewType"
     [draggable]="options.draggable"
+    [visibleType]="'all'"
     [async]="options.async"
     [childrenResolve]="options.childrenResolve"
     (barClick)="barClick($event)"
@@ -58,7 +60,7 @@
         </ng-template>
       </ngx-gantt-column>
       <ngx-gantt-column>
-        <ng-template #header> <span style="font-weight: bold;">开始时间</span> </ng-template>
+        <ng-template #header> <span style="font-weight: bold">开始时间</span> </ng-template>
         <ng-template #cell let-item="item">
           {{ item.start * 1000 | date: 'yyyy-MM-dd' }}
         </ng-template>

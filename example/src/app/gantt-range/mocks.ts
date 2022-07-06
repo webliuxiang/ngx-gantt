@@ -2,17 +2,21 @@ export const mockItems = [
     {
         id: 'item-0101',
         title: 'VERSION 0101',
-        start: 1590035675,
-        end: 1592318400,
+        start: 1650035675,
+        end: 1652318400,
+        ac_start: 1650135675,
+        ac_end: 1652418400,
         group_id: '00001',
         color: '#FF0000',
+        ac_color: '#FF6F00',
         progress: 0.6,
+        ac_progress: 0.6,
         children: [
             {
                 id: 'item-child-0101',
                 title: 'VERSION Children 0101',
-                start: 1590035675,
-                end: 1591318400,
+                start: 1650035675,
+                end: 1651318400,
                 group_id: '00001',
                 color: '#348fe4',
                 linkable: false,
@@ -22,7 +26,7 @@ export const mockItems = [
             {
                 id: 'item-child-0102',
                 title: 'VERSION Children 0102',
-                start: 1590035675,
+                start: 1650035675,
                 group_id: '00001',
                 color: '#FF0000',
                 linkable: false,
@@ -32,7 +36,7 @@ export const mockItems = [
             {
                 id: 'item-child-0103',
                 title: 'VERSION Children 0103',
-                start: 1590035675,
+                start: 1650035675,
                 group_id: '00001',
                 color: '#FF0000',
                 linkable: false,
@@ -44,16 +48,16 @@ export const mockItems = [
     {
         id: 'item-0102',
         title: 'VERSION 0102',
-        start: 1590935675,
-        end: 1591318400,
+        start: 1650935675,
+        end: 1651318400,
         color: '#9ACD32',
         group_id: '00001',
     },
     {
         id: 'item-0103',
         title: 'VERSION 0103',
-        start: 1591035675,
-        end: 1592018400,
+        start: 1651035675,
+        end: 1652018400,
         group_id: '00001',
         expandable: true
     },
@@ -71,8 +75,8 @@ export const mockItems = [
     {
         id: 'item-0202',
         title: 'VERSION 0202',
-        start: 1591035675,
-        end: 1593018400,
+        start: 1651035675,
+        end: 1653018400,
         group_id: '00002',
         links: ['item-0203'],
         color: 'rgb(52, 143, 228, 0.5)',
@@ -83,8 +87,8 @@ export const mockItems = [
     {
         id: 'item-0203',
         title: 'VERSION 0203',
-        start: 1590235675,
-        end: 1591718400,
+        start: 1650235675,
+        end: 1651718400,
         group_id: '00002',
         // links: ['item-0204'],
         progress: 0.6,
@@ -93,8 +97,8 @@ export const mockItems = [
     {
         id: 'item-0204',
         title: 'VERSION 0204',
-        start: 1591035675,
-        end: 1592418400,
+        start: 1651035675,
+        end: 1652418400,
         group_id: '00002',
         links: ['item-0301', 'item-0402']
     },
@@ -102,71 +106,71 @@ export const mockItems = [
     {
         id: 'item-0301',
         title: 'VERSION 0301',
-        start: 1596035675,
-        end: 1599018400,
+        start: 1656035675,
+        end: 1659018400,
         group_id: '00003'
     },
     {
         id: 'item-0302',
         title: 'VERSION 0302',
-        start: 1592035675,
-        end: 1598018400,
+        start: 1652035675,
+        end: 1658018400,
         group_id: '00003'
     },
     {
         id: 'item-0303',
         title: 'VERSION 0303',
-        start: 1590135675,
-        end: 1594018400,
+        start: 1650135675,
+        end: 1654018400,
         group_id: '00003'
     },
     {
         id: 'item-0401',
         title: 'VERSION 0401',
-        start: 1589035675,
-        end: 1594018400,
+        start: 1659035675,
+        end: 1654018400,
         group_id: '00004'
     },
     {
         id: 'item-0402',
         title: 'VERSION 0402',
-        start: 1596035675,
-        end: 1599918400,
+        start: 1656035675,
+        end: 1659918400,
         group_id: '00004'
     },
     {
         id: 'item-0403',
         title: 'VERSION 0403',
-        start: 1593035675,
-        end: 1599018400,
+        start: 1653035675,
+        end: 1659018400,
         group_id: '00004'
     },
     {
         id: 'item-0404',
         title: 'VERSION 0404',
-        start: 1591035675,
-        end: 1592918400,
+        start: 1651035675,
+        end: 1652918400,
         group_id: '00004'
     },
     {
         id: 'item-0501',
         title: 'VERSION 0501',
-        start: 1599935675,
+        start: 1659935675,
         end: 1602018400,
         group_id: '00005'
     },
     {
         id: 'item-0502',
         title: 'VERSION 0502',
-        start: 1591035675,
-        end: 1594018400,
+        start: 1651035675,
+        end: 1654018400,
         group_id: '00005'
     },
     {
         id: 'item-0503',
         title: 'VERSION 0503',
-        start: 1595035675,
-        end: 1599018400,
+        start: 1655035675,
+        end: 1659018400,
         group_id: '00005'
     }
 ];

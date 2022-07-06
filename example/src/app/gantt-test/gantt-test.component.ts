@@ -32,7 +32,7 @@ export class GanttTestComponent implements OnInit {
 
   options = {
       viewType: GanttViewType.week,
-      draggable: false,
+      draggable: true,
       linkable: false,
       async: false,
       childrenResolve: this.getChildren.bind(this)
