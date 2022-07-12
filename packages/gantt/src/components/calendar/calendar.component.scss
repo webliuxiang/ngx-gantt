@@ -74,4 +74,14 @@
   .secondary-backdrop {
     fill: $gantt-date-week-backdrop-bg;
   }
+
+  .drag-box {
+    width: calc(100% - 22px);
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-color: #e4e4e4;
+    z-index: -1;
+  }
 }

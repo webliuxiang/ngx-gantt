@@ -2,10 +2,14 @@
   <span class="today-rect" [hidden]="ganttUpper.viewType !== viewTypes.day"> </span>
   <span class="today-line" *ngIf="ganttUpper.showTodayLine"> </span>
 </div>
-
 <svg class="gantt-calendar-overlay-main" [attr.width]="view.width" [attr.height]="headerHeight">
   <g>
-    <text class="primary-text" *ngFor="let point of view.primaryDatePoints; trackBy: trackBy" [attr.x]="point.x - (view.options.viewType === 'hour' ? 40 : view.cellWidth/2)" [attr.y]="point.y">
+    <text
+      class="primary-text"
+      *ngFor="let point of view.primaryDatePoints; trackBy: trackBy"
+      [attr.x]="point.x - (view.options.viewType === 'hour' ? 40 : view.cellWidth / 2)"
+      [attr.y]="point.y"
+    >
       {{ point.text }}
     </text>
     <ng-container *ngFor="let point of view.secondaryDatePoints; trackBy: trackBy">
@@ -17,21 +21,21 @@
     <g>
       <line
         *ngFor="let point of view.primaryDatePoints; let i = index; trackBy: trackBy"
-        [attr.x1]="point.x + (view.options.viewType === 'hour' ? 0 : view.cellWidth/2)"
-        [attr.x2]="point.x + (view.options.viewType === 'hour' ? 0 : view.cellWidth/2)"
+        [attr.x1]="point.x + (view.options.viewType === 'hour' ? 0 : view.cellWidth / 2)"
+        [attr.x2]="point.x + (view.options.viewType === 'hour' ? 0 : view.cellWidth / 2)"
         [attr.y1]="0"
         [attr.y2]="18"
         class="primary-line"
       ></line>
     </g>
     <!-- <g>
-      <line [attr.x1]="0" [attr.x2]="view.width" [attr.y1]="18" [attr.y2]="headerHeight - 18" class="header-line"></line>
-    </g> -->
+        <line [attr.x1]="0" [attr.x2]="view.width" [attr.y1]="18" [attr.y2]="headerHeight - 18" class="header-line"></line>
+      </g> -->
     <g>
       <line
         *ngFor="let point of view.primaryDatePoints; let i = index; trackBy: trackBy"
-        [attr.x1]="point.x + (view.options.viewType === 'hour' ? 0 : view.cellWidth/2)"
-        [attr.x2]="point.x + (view.options.viewType === 'hour' ? 0 : view.cellWidth/2)"
+        [attr.x1]="point.x + (view.options.viewType === 'hour' ? 0 : view.cellWidth / 2)"
+        [attr.x2]="point.x + (view.options.viewType === 'hour' ? 0 : view.cellWidth / 2)"
         [attr.y1]="18"
         [attr.y2]="mainHeight - 18"
         class="primary-line"
@@ -54,8 +58,8 @@
       ></line>
       <line
         *ngFor="let point of view.primaryDatePoints; let i = index; trackBy: trackBy"
-        [attr.x1]="point.x + (view.options.viewType === 'hour' ? 0 : view.cellWidth/2)"
-        [attr.x2]="point.x + (view.options.viewType === 'hour' ? 0 : view.cellWidth/2)"
+        [attr.x1]="point.x + (view.options.viewType === 'hour' ? 0 : view.cellWidth / 2)"
+        [attr.x2]="point.x + (view.options.viewType === 'hour' ? 0 : view.cellWidth / 2)"
         [attr.y1]="0"
         [attr.y2]="mainHeight"
         class="primary-line"
@@ -63,3 +67,13 @@
     </g>
   </g>
 </svg>
+<!-- <div
+  class="drag-box"
+  id="drag-box"
+  #dragBox
+  cdkDrag
+  cdkDragLockAxis="x"
+  (cdkDragMoved)="mainMouseEnter($event)"
+  (cdkDragStarted)="mainMouseDown($event)"
+  (cdkDragEnded)="mainMouseUp($event)"
+></div> -->

@@ -11,6 +11,7 @@ import {
     startOfMonth,
     startOfQuarter,
     startOfYear,
+    endOfHour,
     endOfDay,
     endOfWeek,
     endOfMonth,
@@ -49,6 +50,7 @@ export {
     startOfMonth,
     startOfQuarter,
     startOfYear,
+    endOfHour,
     endOfDay,
     endOfWeek,
     endOfMonth,
@@ -239,6 +241,10 @@ export class GanttDate {
         return new GanttDate(startOfYear(this.value));
     }
 
+    endOfHour(): GanttDate {
+        return new GanttDate(endOfHour(this.value));
+    }
+    
     endOfDay(): GanttDate {
         return new GanttDate(endOfDay(this.value));
     }

@@ -23,12 +23,17 @@ import { delay } from 'rxjs/operators';
 export class AppGanttExampleComponent implements OnInit {
     constructor(private printService: GanttPrintService) {}
 
+    startTime0101 = 1640966400;
+    endTime1231 = 1672416000;
+    startTime0201 = 1643846400;
+    endTime0501 = 1651334400;
+
     items = mockItems;
 
     groups = mockGroups;
 
     options = {
-        viewType: GanttViewType.hour,
+        viewType: GanttViewType.week,
         draggable: true,
         linkable: false,
         async: false,

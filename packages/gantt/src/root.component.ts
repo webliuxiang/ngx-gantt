@@ -9,7 +9,9 @@ import {
     TemplateRef,
     Input,
     Optional,
-    AfterViewInit
+    AfterViewInit,
+    ViewChild,
+    ViewChildren
 } from '@angular/core';
 import { GanttDomService, ScrollDirection } from './gantt-dom.service';
 import { GanttDragContainer } from './gantt-drag-container';

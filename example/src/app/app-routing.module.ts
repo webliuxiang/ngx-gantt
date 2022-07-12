@@ -4,6 +4,7 @@ import { AppGanttExampleComponent } from './gantt/gantt.component';
 import { AppGanttFlatExampleComponent } from './gantt-flat/flat.component';
 import { AppGanttRangeExampleComponent } from './gantt-range/gantt-range.component';
 import { GanttTestComponent } from './gantt-test/gantt-test.component';
+import { GanttDragDropComponent } from './gantt-drag-drop/gantt-drag-drop.component';
 
 
 const routes: Routes = [
@@ -22,6 +23,10 @@ const routes: Routes = [
     {
         path: 'test',
         component: GanttTestComponent
+    },
+    {
+        path: 'drag-drop',
+        component: GanttDragDropComponent
     }
 ];
 

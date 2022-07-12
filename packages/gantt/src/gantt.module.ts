@@ -17,10 +17,11 @@ import { NgxGanttRootComponent } from './root.component';
 import { NgxGanttRangeComponent } from './components/range/range.component';
 import { IsGanttRangeItemPipe, IsGanttBarItemPipe, IsGanttCustomItemPipe } from './gantt.pipe';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { NgxGanttTaskBarComponent } from './components/bar/task-bar.component';
 
 @NgModule({
     imports: [CommonModule, DragDropModule],
-    exports: [NgxGanttComponent, NgxGanttTableComponent, NgxGanttTableColumnComponent, NgxGanttRootComponent, NgxGanttBarComponent, NgxGanttBarActualComponent],
+    exports: [NgxGanttComponent, NgxGanttTableComponent, NgxGanttTableColumnComponent, NgxGanttRootComponent, NgxGanttBarComponent,NgxGanttTaskBarComponent, NgxGanttBarActualComponent],
     declarations: [
         NgxGanttComponent,
         NgxGanttTableComponent,
@@ -30,6 +31,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
         GanttCalendarComponent,
         GanttLinksComponent,
         NgxGanttBarComponent,
+        NgxGanttTaskBarComponent,
         NgxGanttBarActualComponent,
         GanttIconComponent,
         GanttDragBackdropComponent,

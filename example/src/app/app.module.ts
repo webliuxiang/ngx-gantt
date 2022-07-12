@@ -13,6 +13,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppGanttFlatComponent } from './gantt-flat/component/flat.component';
 import { EXAMPLE_MODULES } from './content/example-modules';
 import { GanttTestComponent } from './gantt-test/gantt-test.component';
+import { GanttDragDropComponent } from './gantt-drag-drop/gantt-drag-drop.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
     declarations: [
@@ -21,7 +23,8 @@ import { GanttTestComponent } from './gantt-test/gantt-test.component';
         AppGanttFlatExampleComponent,
         AppGanttRangeExampleComponent,
         AppGanttFlatComponent,
-        GanttTestComponent
+        GanttTestComponent,
+        GanttDragDropComponent
     ],
     imports: [
         BrowserModule,
@@ -29,6 +32,7 @@ import { GanttTestComponent } from './gantt-test/gantt-test.component';
         DocgeniTemplateModule,
         NgxGanttModule,
         AppRoutingModule,
+        DragDropModule,
         RouterModule.forRoot([]),
         ...EXAMPLE_MODULES
     ],

@@ -262,6 +262,7 @@ export abstract class GanttUpper {
     }
 
     computeItemsRefs(...items: GanttItemInternal[]) {
+        // LOG:
         items.forEach((item) => {
             item.updateRefs({
                 width: item.start && item.end ? this.view.getDateRangeWidth(item.start.startOfDay(), item.end.endOfDay()) : 0,

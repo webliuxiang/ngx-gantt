@@ -3,10 +3,11 @@ import { DragRef, DragDrop } from '@angular/cdk/drag-drop';
 import { GanttDomService } from '../../gantt-dom.service';
 import { GanttDragContainer } from '../../gantt-drag-container';
 import { GanttItemInternal } from '../../class/item';
-import { GanttDate, differenceInCalendarDays,differenceInHours } from '../../utils/date';
+import { GanttDate, differenceInCalendarDays, differenceInHours } from '../../utils/date';
 import { fromEvent, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { GanttUpper } from '../../gantt-upper';
+import { GanttItemDragDropService } from 'ngx-gantt/services/gantt-item-drag-drop.service';
 
 const dragMinWidth = 10;
 const activeClass = 'gantt-bar-active';
@@ -19,7 +20,7 @@ function createSvgElement(qualifiedName: string, className: string) {
 }
 
 @Injectable()
-export class GanttBarDrag implements OnDestroy {
+export class GanttTaskItemDrag implements OnDestroy {
     private ganttUpper: GanttUpper;
 
     private barElement: HTMLElement;
@@ -42,7 +43,12 @@ export class GanttBarDrag implements OnDestroy {
 
     private destroy$ = new Subject();
 
-    constructor(private dragDrop: DragDrop, private dom: GanttDomService, private dragContainer: GanttDragContainer) {}
+    constructor(
+        private dragDrop: DragDrop,
+        private dom: GanttDomService,
+        private dragContainer: GanttDragContainer,
+        private ganttItemDragDropService: GanttItemDragDropService
+    ) {}
 
     private createMouseEvents() {
         fromEvent(this.barElement, 'mouseenter')
@@ -74,11 +80,11 @@ export class GanttBarDrag implements OnDestroy {
         const dragRef = this.dragDrop.createDrag(this.barElement);
         // dragRef.lockAxis = 'x';
         dragRef.started.subscribe(() => {
+            this.ganttItemDragDropService.setDragStatus(true);
             this.setDraggingStyles();
             this.dragContainer.dragStarted.emit({ item: this.item.origin });
         });
         dragRef.moved.subscribe((event) => {
-            // LOG:
             const x = this.item.refs.x + event.distance.x;
             const days = differenceInCalendarDays(this.item.end.value, this.item.start.value);
             const hours = differenceInHours(this.item.end.value, this.item.start.value);
@@ -96,6 +102,7 @@ export class GanttBarDrag implements OnDestroy {
             this.closeDragBackdrop();
             event.source.reset();
             this.dragContainer.dragEnded.emit({ item: this.item.origin });
+            this.ganttItemDragDropService.setDragStatus(false);
         });
         this.barDragRef = dragRef;
         return dragRef;
@@ -104,7 +111,7 @@ export class GanttBarDrag implements OnDestroy {
     private createBarHandleDrags() {
         const dragRefs = [];
         const handles = this.barElement.querySelectorAll<HTMLElement>('.drag-handles .handle');
-        
+
         handles.forEach((handle, index) => {
             const isBefore = index === 0;
             const dragRef = this.dragDrop.createDrag(handle);
@@ -275,7 +282,6 @@ export class GanttBarDrag implements OnDestroy {
     }
 
     createDrags(elementRef: ElementRef, item: GanttItemInternal, ganttUpper: GanttUpper) {
-        
         this.item = item;
         this.barElement = elementRef.nativeElement;
         this.ganttUpper = ganttUpper;

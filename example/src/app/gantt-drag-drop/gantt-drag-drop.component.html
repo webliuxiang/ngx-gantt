@@ -1,0 +1,29 @@
+<div class="example-container">
+  <h2>上边list</h2>
+  <div
+    cdkDropList
+    #todoList="cdkDropList"
+    [cdkDropListData]="leftSource"
+    [cdkDropListConnectedTo]="[doneList]"
+    class="example-list"
+    (cdkDropListDropped)="drop($event)"
+  >
+    <div class="example-box" *ngFor="let item of leftSource" cdkDrag>{{ item }}</div>
+  </div>
+</div>
+
+<div class="divide"></div>
+
+<div class="example-container">
+  <h2>下边list</h2>
+  <div
+    cdkDropList
+    #doneList="cdkDropList"
+    [cdkDropListData]="rightSource"
+    [cdkDropListConnectedTo]="[todoList]"
+    class="example-list"
+    (cdkDropListDropped)="drop($event)"
+  >
+    <div class="example-box" *ngFor="let item of rightSource" cdkDrag>{{ item }}</div>
+  </div>
+</div>

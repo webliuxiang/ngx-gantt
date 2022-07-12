@@ -1,4 +1,4 @@
-import { GanttDate, differenceInDays, GanttDateUtil } from '../utils/date';
+import { GanttDate, differenceInDays, differenceInHours, GanttDateUtil } from '../utils/date';
 import { GanttDatePoint } from '../class/date-point';
 import { BehaviorSubject } from 'rxjs';
 import { GanttViewType } from '../class/view-type';
@@ -88,7 +88,10 @@ export abstract class GanttView {
 
     protected getDateIntervalWidth(start: GanttDate, end: GanttDate) {
         let result = 0;
+        
         const days = differenceInDays(end.value, start.value);
+        const hours = differenceInHours(end.value, start.value);
+        
         for (let i = 0; i < Math.abs(days); i++) {
             result += this.getDayOccupancyWidth(start.addDays(i));
         }
@@ -166,6 +169,7 @@ export abstract class GanttView {
 
     // 根据X坐标获取对应时间
     getDateByXPoint(x: number) {
+        // LOG:
         const indexOfSecondaryDate = Math.floor(x / this.getCellWidth());
         const matchDate = this.secondaryDatePoints[indexOfSecondaryDate];
         const dayWidth = this.getDayOccupancyWidth(matchDate?.start);

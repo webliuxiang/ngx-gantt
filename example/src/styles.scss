@@ -11,6 +11,7 @@ $dg-primary: #2e3f52;
   flex-direction: column;
   background: #eee;
   padding: 20px;
+  height: calc(100% - 60px);
 
   .gantt-demo-header {
     height: 50px;

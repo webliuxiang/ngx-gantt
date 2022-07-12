@@ -13,7 +13,13 @@
 <!-- items -->
 <ng-template #itemsTemplate>
   <div #ganttMainItems class="gantt-main-items" [style.width.px]="ganttUpper.view.width">
-    <ng-template [ngTemplateOutlet]="ganttItems" [ngTemplateOutletContext]="{ items: items }"></ng-template>
+    <div class="item-box">
+      <ng-template [ngTemplateOutlet]="ganttItems" [ngTemplateOutletContext]="{ items: items }"></ng-template>
+    </div>
+    <div class="divider"></div>
+    <div class="task-box">
+      <ng-template [ngTemplateOutlet]="taskItems" [ngTemplateOutletContext]="{ items: items }"></ng-template>
+    </div>
   </div>
 </ng-template>
 
@@ -24,8 +30,22 @@
         <ng-template [ngTemplateOutlet]="itemTemplate" [ngTemplateOutletContext]="{ item: item.origin, refs: item.refs }"></ng-template>
       </ng-container>
       <gantt-range *ngIf="item.type | isGanttRangeItem" [template]="rangeTemplate" [item]="item"></gantt-range>
-      <gantt-bar *ngIf="(visibleType === 'all' || visibleType === 'plan') && item.type | isGanttBarItem" [item]="item" [template]="barTemplate" (contextmenu)="contextmenu.emit($event)" (barClick)="barClick.emit($event)" (doubleClick)="doubleClick.emit($event)"></gantt-bar>
-      <gantt-bar-actual *ngIf="(visibleType === 'all' || visibleType === 'actual') && item.type | isGanttBarItem" [item]="item" [template]="barTemplate" (contextmenu)="contextmenu.emit($event)" (barClick)="barClick.emit($event)" (doubleClick)="doubleClick.emit($event)"></gantt-bar-actual>
+      <gantt-bar
+        *ngIf="(visibleType === 'all' || visibleType === 'plan') && item.type | isGanttBarItem"
+        [item]="item"
+        [template]="barTemplate"
+        (contextmenu)="contextmenu.emit($event)"
+        (barClick)="barClick.emit($event)"
+        (doubleClick)="doubleClick.emit($event)"
+      ></gantt-bar>
+      <gantt-bar-actual
+        *ngIf="(visibleType === 'all' || visibleType === 'actual') && item.type | isGanttBarItem"
+        [item]="item"
+        [template]="barTemplate"
+        (contextmenu)="contextmenu.emit($event)"
+        (barClick)="barClick.emit($event)"
+        (doubleClick)="doubleClick.emit($event)"
+      ></gantt-bar-actual>
     </div>
     <ng-template
       *ngIf="item.children && item.expanded"
@@ -34,15 +54,45 @@
     ></ng-template>
   </ng-container>
 </ng-template>
-<div
+<ng-template #taskItems let-items="items">
+  <ng-container *ngFor="let item of items; trackBy: trackBy">
+    <div class="gantt-item" [ngClass]="item.id" [style.height.px]="ganttUpper.styles.lineHeight">
+      <ng-container *ngIf="item.type | isGanttCustomItem">
+        <ng-template [ngTemplateOutlet]="itemTemplate" [ngTemplateOutletContext]="{ item: item.origin, refs: item.refs }"></ng-template>
+      </ng-container>
+      <gantt-task-bar
+        *ngIf="(visibleType === 'all' || visibleType === 'plan') && item.type | isGanttBarItem"
+        [item]="item"
+        [template]="barTemplate"
+        (contextmenu)="contextmenu.emit($event)"
+        (barClick)="barClick.emit($event)"
+        (doubleClick)="doubleClick.emit($event)"
+      ></gantt-task-bar>
+      <!-- <gantt-bar-actual
+        *ngIf="(visibleType === 'all' || visibleType === 'actual') && item.type | isGanttBarItem"
+        [item]="item"
+        [template]="barTemplate"
+        (contextmenu)="contextmenu.emit($event)"
+        (barClick)="barClick.emit($event)"
+        (doubleClick)="doubleClick.emit($event)"
+      ></gantt-bar-actual> -->
+    </div>
+    <ng-template
+      *ngIf="item.children && item.expanded"
+      [ngTemplateOutlet]="ganttItems"
+      [ngTemplateOutletContext]="{ items: item.children }"
+    ></ng-template>
+  </ng-container>
+</ng-template>
+<!-- <div
   class="vir-box"
   id="virtualBox"
   #virtualBox
-  [style.width.px]="ganttUpper.view.width"
-  style="position: absolute; top: 0; left: 0;height: 100%;"
+  [style.height.px]="ganttUpper.styles.lineHeight * items.length"
+  style="width: 100%; position: absolute; top: 0; left: 0;"
   cdkDrag
   cdkDragLockAxis="x"
   (cdkDragMoved)="mainMouseEnter($event)"
   (cdkDragStarted)="mainMouseDown($event)"
   (cdkDragEnded)="mainMouseUp($event)"
-></div>
+></div> -->

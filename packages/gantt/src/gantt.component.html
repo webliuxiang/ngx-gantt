@@ -1,26 +1,48 @@
-<div style="width: 100%; height: 100%;">
-  <div>
-    <ngx-gantt-root>
-      <ng-template #sideTemplate> 
-        <gantt-table [groups]="groups" [items]="items" [titles]="titles" [columns]="columns" [groupTemplate]="groupTemplate" [emptyTemplate]="tableEmptyTemplate" (colClick)="colClick($event)" (colHover)="colHover($event)"></gantt-table>
-      </ng-template>
-      <ng-template #mainTemplate>
-        <gantt-main
-          [groups]="groups"
-          [items]="items"
-          [groupHeaderTemplate]="groupHeaderTemplate"
-          [itemTemplate]="itemTemplate"
-          [barTemplate]="barTemplate"
-          [visibleType]="visibleType"
-          [rangeTemplate]="rangeTemplate"
-          (barClick)="barClick.emit($event)"
-          (doubleClick)="doubleClick.emit($event)"
-          (contextmenu)="contextmenu.emit($event)"
-          (lineClick)="lineClick.emit($event)"
-          #ganttMain
-        >
-        </gantt-main>
-      </ng-template>
-    </ngx-gantt-root>
-  </div>
+<div style="width: 100%; height: 100%">
+  <!-- <div> -->
+  <ngx-gantt-root>
+    <ng-template #sideTemplate>
+      <gantt-table
+        [groups]="groups"
+        [items]="items"
+        [titles]="titles"
+        [columns]="columns"
+        [groupTemplate]="groupTemplate"
+        [emptyTemplate]="tableEmptyTemplate"
+        (colClick)="colClick($event)"
+        (colHover)="colHover($event)"
+      ></gantt-table>
+    </ng-template>
+    <ng-template #mainTemplate>
+      <gantt-main
+        [groups]="groups"
+        [items]="items"
+        [groupHeaderTemplate]="groupHeaderTemplate"
+        [itemTemplate]="itemTemplate"
+        [barTemplate]="barTemplate"
+        [visibleType]="visibleType"
+        [rangeTemplate]="rangeTemplate"
+        (barClick)="barClick.emit($event)"
+        (doubleClick)="doubleClick.emit($event)"
+        (contextmenu)="contextmenu.emit($event)"
+        (lineClick)="lineClick.emit($event)"
+        #ganttMain
+      >
+      </gantt-main>
+      <div
+        class="vir-box"
+        id="virtualBox"
+        #virtualBox
+        cdkDrag
+        cdkDragLockAxis="x"
+        (cdkDragMoved)="mainMouseEnter($event)"
+        (cdkDragStarted)="mainMouseDown($event)"
+        (cdkDragEnded)="mainMouseUp($event)"
+      >
+        <div [style.height.px]="styles.lineHeight * items.length"></div>
+      </div>
+      <div #taskDropBox class="task-drop-box"></div>
+    </ng-template>
+  </ngx-gantt-root>
+  <!-- </div> -->
 </div>
