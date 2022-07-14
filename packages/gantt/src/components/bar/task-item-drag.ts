@@ -94,6 +94,10 @@ export class GanttTaskItemDrag implements OnDestroy {
             this.openDragBackdrop(this.barElement, this.ganttUpper.view.getDateByXPoint(x), end);
         });
         dragRef.ended.subscribe((event) => {
+            console.log("end");
+            console.log(event);
+            console.log(this.item);
+            
             const days = differenceInCalendarDays(this.item.end.value, this.item.start.value);
             const start = this.ganttUpper.view.getDateByXPoint(this.item.refs.x + event.distance.x);
             const end = start.addDays(days);
@@ -101,7 +105,7 @@ export class GanttTaskItemDrag implements OnDestroy {
             this.clearDraggingStyles();
             this.closeDragBackdrop();
             event.source.reset();
-            this.dragContainer.dragEnded.emit({ item: this.item.origin });
+            this.dragContainer.dragEnded.emit({ item: this.item.origin, moveOption: event.distance });
             this.ganttItemDragDropService.setDragStatus(false);
         });
         this.barDragRef = dragRef;

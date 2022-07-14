@@ -60,18 +60,33 @@
         .gantt-main-items {
             overflow: hidden;
             height: 100%;
+            position: relative;
             min-height: calc(100% - #{$gantt-header-height}*2);
 
             .divider {
+                width: 100%;
                 height: 0;
                 border: 4px solid #858383;
                 box-sizing: border-box;
+                position: absolute;
+                top: 50%;
             }
 
             .item-box,
             .task-box {
+                width: 100%;
                 height: 50%;
+                position: absolute;
+            }
+
+            .item-box {
                 overflow-y: scroll;
+                top: 0;
+            }
+
+            .task-box {
+                top: calc(50% + 8px);
+                z-index: 2;
             }
         }
 
@@ -114,5 +129,5 @@
         overflow: hidden;
         z-index: 0;
     }
-    
+
 }

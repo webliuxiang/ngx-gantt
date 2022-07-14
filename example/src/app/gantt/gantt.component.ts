@@ -60,6 +60,8 @@ export class AppGanttExampleComponent implements OnInit {
     dragEnded(event: GanttDragEvent) {
         this.items = [...this.items];
         this.groups = [...this.groups];
+        console.log(event);
+        
     }
 
     loadOnScroll(event: GanttLoadOnScrollEvent) {}

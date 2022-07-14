@@ -246,7 +246,7 @@ export class NgxGanttComponent extends GanttUpper implements OnInit, AfterViewIn
     }
 
     setTaskDropBoxStyle(element: ElementRef,status: boolean) {
-        console.log(element.nativeElement.querySelector('.task-drop-box'));
+        // console.log(element.nativeElement.querySelector('.task-drop-box'));
         if (status) {
             element.nativeElement.querySelector('.task-drop-box').style.background = '#a3909070';
             element.nativeElement.querySelector('.task-drop-box').style.zIndex = '2';

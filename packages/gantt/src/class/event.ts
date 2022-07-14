@@ -4,6 +4,11 @@ import { GanttItem } from './item';
 
 export class GanttDragEvent<T = unknown> {
     item: GanttItem<T>;
+    moveOption?: {
+        x: number;
+        y: number;
+    };
+    addTask?: Boolean;
 }
 
 export class GanttTableEvent {

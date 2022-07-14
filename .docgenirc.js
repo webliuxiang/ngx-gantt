@@ -45,6 +45,16 @@ module.exports = {
             }
         },
         {
+            title: '拖拽',
+            path: 'drag-drop',
+            lib: 'ngx-gantt',
+            locales: {
+                'en-us': {
+                    title: 'Drag and drop'
+                }
+            }
+        },
+        {
             title: '配置',
             path: 'configuration',
             lib: 'ngx-gantt',
