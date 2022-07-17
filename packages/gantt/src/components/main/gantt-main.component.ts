@@ -76,6 +76,13 @@ export class GanttMainComponent implements OnInit {
         let boxWidth = this.virtualBox.nativeElement.style.width.split("px")[0]*1;
         let clientWidth = this.root.clientWidth;
         let scrollWidth = boxWidth - clientWidth;
+
+        // console.log(e.distance.x);
+        // console.log(this.root.scrollLeft);
+        // console.log(this.root.clientWidth);
+        // console.log(scrollWidth);
+        // console.log("===============");
+
         if (e.distance.x > 0 && this.root.scrollLeft === 0) {
             this.flag = true;
         } else if (e.distance.x < 0 && this.root.scrollLeft === scrollWidth) {

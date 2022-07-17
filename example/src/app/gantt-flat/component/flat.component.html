@@ -10,7 +10,7 @@
     </div>
     <!-- <ng-template *ngFor="let group of groups; trackBy: trackBy"> -->
 
-      <!-- <table>
+    <!-- <table>
         <thead>
           <tr>
             <td>ID</td>
@@ -33,11 +33,18 @@
     <!-- </ng-template> -->
   </ng-template>
   <ng-template #mainTemplate>
-    <div class="gantt-main-container">
+    <div class="gantt-main-container" #ganttMainContainer cdkDropListGroup>
       <!-- groups -->
       <div class="gantt-main-groups" *ngIf="groups && groups.length > 0" [style.width.px]="view.width">
-        <ng-container *ngFor="let group of groups; trackBy: trackBy">
-          <div class="gantt-main-group" [style.height.px]="group.mergedItems?.length * (styles.lineHeight + 10) - 10">
+        <ng-container *ngFor="let group of groups; trackBy: trackBy; let i = index">
+          <!-- list -->
+          <div
+            class="gantt-main-group"
+            [style.height.px]="group.mergedItems?.length * (styles.lineHeight + 10) - 10"
+            cdkDropList
+            [cdkDropListData]="group.mergedItems"
+            (cdkDropListDropped)="drop($event)"
+          >
             <ng-container *ngFor="let items of group.mergedItems">
               <div class="gantt-flat-items" [style.height.px]="styles.lineHeight">
                 <ng-container *ngFor="let item of items; trackBy: trackBy">
@@ -46,6 +53,21 @@
               </div>
             </ng-container>
           </div>
+        </ng-container>
+      </div>
+      <!-- 水平拖拽元素 -->
+      <div
+        class="drag-box"
+        #dragBox
+        [style.width.px]="view.width"
+        cdkDrag
+        cdkDragLockAxis="x"
+        (cdkDragMoved)="mainMouseEnter($event)"
+        (cdkDragStarted)="mainMouseDown($event)"
+        (cdkDragEnded)="mainMouseUp($event)"
+      >
+        <ng-container *ngFor="let group of groups; trackBy: trackBy">
+          <div class="gantt-main-group" [style.height.px]="group.mergedItems?.length * (styles.lineHeight + 10) - 10"></div>
         </ng-container>
       </div>
     </div>

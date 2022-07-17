@@ -1,10 +1,24 @@
-import { Component, OnInit, HostBinding, OnChanges, OnDestroy, SimpleChanges, NgZone, ChangeDetectorRef, ElementRef } from '@angular/core';
+import {
+    Component,
+    OnInit,
+    HostBinding,
+    OnChanges,
+    OnDestroy,
+    SimpleChanges,
+    NgZone,
+    ChangeDetectorRef,
+    ElementRef,
+    ViewChild
+} from '@angular/core';
 import { GANTT_UPPER_TOKEN, GanttUpper, GanttItemInternal, GanttGroupInternal } from 'ngx-gantt';
 import { startWith, takeUntil } from 'rxjs/operators';
+
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
 @Component({
     selector: 'app-gantt-flat',
     templateUrl: './flat.component.html',
+    styleUrls: ['./flat.component.scss'],
     providers: [
         {
             provide: GANTT_UPPER_TOKEN,
@@ -13,11 +27,19 @@ import { startWith, takeUntil } from 'rxjs/operators';
     ]
 })
 export class AppGanttFlatComponent extends GanttUpper implements OnInit, OnChanges, OnDestroy {
+    public root: Element;
+    public dragList: string[] = [];
     mergeIntervalDays = 3;
 
     groups: GanttGroupInternal[] = [];
 
     @HostBinding('class.gantt-flat') ganttFlatClass = true;
+
+    @ViewChild('dragBox') dragBox;
+    @ViewChild('ganttMainContainer') ganttMainContainer;
+    startMove: any;
+    flag: boolean;
+    endMove: any;
 
     constructor(elementRef: ElementRef<HTMLElement>, cdr: ChangeDetectorRef, ngZone: NgZone) {
         super(elementRef, cdr, ngZone);
@@ -47,11 +69,18 @@ export class AppGanttFlatComponent extends GanttUpper implements OnInit, OnChang
 
     ngOnInit() {
         super.onInit();
+        this.getRootDom(this.elementRef);
         this.dragEnded.pipe(startWith(null), takeUntil(this.unsubscribe$)).subscribe(() => {
             this.buildGroupItems();
         });
-        console.log(this.groups);
-        
+        // console.log(this.groups);
+        this.setDragList(this.groups);
+    }
+
+    private setDragList(groups) {
+        groups.map((item, key) => {
+            this.dragList.push('groupList' + key);
+        });
     }
 
     private buildGroupItems() {
@@ -62,8 +91,71 @@ export class AppGanttFlatComponent extends GanttUpper implements OnInit, OnChang
         });
     }
 
+    drop(event: CdkDragDrop<string[]>) {
+        if (event.previousContainer === event.container) {
+            moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+        } else {
+            transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
+        }
+        console.log(event);
+
+    }
+
     ngOnChanges(changes: SimpleChanges) {
         super.onChanges(changes);
+    }
+
+    getRootDom(root: ElementRef<HTMLElement>) {
+        this.root = root.nativeElement;
+        // console.log('获取gantt-main-container的DOM对象');
+    }
+    // 每次移动后都要把 drag-box 元素重置
+    resetVirBoxDom(root: ElementRef) {
+        root.nativeElement.querySelector('.drag-box').style.transform = 'translate3d(0px, 0px, 0px)';
+        // console.log('获取gantt-main-container的DOM对象');
+    }
+
+    // mousedown
+    mainMouseDown(e) {
+        // console.log('start');
+    }
+    // mouseenter
+    mainMouseEnter(e) {
+        this.startMove = e.distance.x;
+        let boxWidth = this.dragBox.nativeElement.style.width.split('px')[0] * 1;
+        let clientWidth = this.ganttMainContainer.nativeElement.clientWidth;
+        let scrollWidth = boxWidth - clientWidth;
+        // console.log("e.distance.x ---> " + e.distance.x);
+        // console.log("this.startMove ---> " + this.startMove);
+        // console.log("this.endMove ---> " + this.endMove);
+        // console.log("this.ganttMainContainer.nativeElement.clientWidth ---> " + this.ganttMainContainer.nativeElement.clientWidth);
+        // console.log("this.ganttMainContainer.nativeElement.scrollLeft ---> " + this.ganttMainContainer.nativeElement.scrollLeft);
+        // console.log("scrollWidth ---> " + scrollWidth);
+        // console.log("===============");
+
+        if (e.distance.x > 0 && this.ganttMainContainer.nativeElement.scrollLeft === 0) {
+            this.flag = true;
+        } else if (e.distance.x < 0 && this.ganttMainContainer.nativeElement.scrollLeft === scrollWidth) {
+            this.flag = true;
+        } else {
+            this.flag = false;
+        }
+
+        if (this.flag) return;
+        // this.ganttMainContainer.nativeElement.scrollLeft -= e.distance.x/15;
+        let moveDistance = this.startMove - this.endMove;
+        // console.log(moveDistance);
+
+        this.ganttMainContainer.nativeElement.scrollLeft -= moveDistance;
+
+        this.endMove = this.startMove;
+    }
+    // mouseup
+    mainMouseUp(e) {
+        this.resetVirBoxDom(this.elementRef);
+        this.flag = false;
+        this.startMove = 0;
+        this.endMove = 0;
     }
 
     ngOnDestroy() {

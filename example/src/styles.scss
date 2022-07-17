@@ -7,6 +7,7 @@ $dg-primary: #2e3f52;
 @import '~@docgeni/template/styles/index.scss';
 
 .gantt-demo {
+  height: 500px;
   display: flex;
   flex-direction: column;
   background: #eee;
@@ -40,8 +41,8 @@ $dg-primary: #2e3f52;
     position: sticky;
     top: 0;
     background: $gantt-bg-color;
-    height: $gantt-header-height;
-    line-height: $gantt-header-height;
+    height: $gantt-header-height * 2;
+    line-height: $gantt-header-height * 2;
     z-index: 1;
     border-bottom: 1px solid $gantt-border-color;
     box-sizing: border-box;
@@ -53,13 +54,13 @@ $dg-primary: #2e3f52;
       box-sizing: content-box;
       display: flex;
       align-items: center;
-      padding: 15px;
+      // padding: 15px;
     }
   }
 
   .gantt-main-group {
     border-bottom: 1px solid #eee;
-    padding: 15px 0;
+    // padding: 15px 0;
     .gantt-flat-items {
       position: relative;
     }

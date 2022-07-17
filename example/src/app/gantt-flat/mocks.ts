@@ -19,7 +19,23 @@ export const mockGroups = [
     {
         id: '00005',
         title: 'Project 5'
-    }
+    },
+    {
+        id: '00006',
+        title: 'Project 6'
+    },
+    {
+        id: '00007',
+        title: 'Project 7'
+    },
+    {
+        id: '00008',
+        title: 'Project 8'
+    },
+    {
+        id: '00009',
+        title: 'Project 9'
+    },
 ];
 
 export const mockItems = [
@@ -154,5 +170,33 @@ export const mockItems = [
         start: 1595035675,
         end: 1599018400,
         group_id: '00005'
-    }
+    },
+    {
+        id: 'item-0601',
+        title: 'VERSION 0601',
+        start: 1591035675,
+        end: 1592918400,
+        group_id: '00006'
+    },
+    {
+        id: 'item-0701',
+        title: 'VERSION 0701',
+        start: 1599935675,
+        end: 1602018400,
+        group_id: '00007'
+    },
+    {
+        id: 'item-0802',
+        title: 'VERSION 0802',
+        start: 1591035675,
+        end: 1594018400,
+        group_id: '00008'
+    },
+    {
+        id: 'item-0903',
+        title: 'VERSION 0903',
+        start: 1595035675,
+        end: 1609018400,
+        group_id: '00009'
+    },
 ];

@@ -1,0 +1,41 @@
+<div cdkDropListGroup>
+    <div class="example-container">
+      <h2>To do</h2>
+      <div
+        class="example-list"
+        cdkDropList
+        [cdkDropListData]="list"
+        (cdkDropListDropped)="drop($event)"
+      >
+        <div class="example-box" *ngFor="let item of list" cdkDrag>{{ item }}</div>
+      </div>
+    </div>
+    
+    <div class="example-container">
+      <h2>Done</h2>
+      <div
+        class="example-list"
+        cdkDropList
+        [cdkDropListData]="list2"
+        (cdkDropListDropped)="drop($event)"
+      >
+      <div>
+        <div>
+            <div class="example-box" *ngFor="let item of list2" cdkDrag>{{ item }}</div>
+        </div>
+      </div>
+      </div>
+    </div>
+    
+    <div class="example-container">
+      <h2>Done2</h2>
+      <div
+        class="example-list"
+        cdkDropList
+        [cdkDropListData]="list3"
+        (cdkDropListDropped)="drop($event)"
+      >
+        <div class="example-box" *ngFor="let item of list3" cdkDrag>{{ item }}</div>
+      </div>
+    </div>
+</div>

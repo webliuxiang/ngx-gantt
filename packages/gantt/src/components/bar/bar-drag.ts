@@ -72,7 +72,7 @@ export class GanttBarDrag implements OnDestroy {
 
     private createBarDrag() {
         const dragRef = this.dragDrop.createDrag(this.barElement);
-        dragRef.lockAxis = 'x';
+        // dragRef.lockAxis = 'x';
         dragRef.started.subscribe(() => {
             this.setDraggingStyles();
             this.dragContainer.dragStarted.emit({ item: this.item.origin });
