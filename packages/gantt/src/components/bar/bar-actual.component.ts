@@ -33,8 +33,8 @@ function linearGradient(sideOrCorner: string, color: string, stop: string) {
 })
 export class NgxGanttBarActualComponent extends GanttItemActualUpper implements OnInit, AfterViewInit, OnChanges, OnDestroy {
     @Output() barClick = new EventEmitter<GanttBarClickEvent>();
-    @Output() contextmenu = new EventEmitter<GanttBarClickEvent>();
-    @Output() doubleClick = new EventEmitter<GanttBarClickEvent>();
+    @Output() barContextmenuClick = new EventEmitter<GanttBarClickEvent>();
+    @Output() barDoubleClick = new EventEmitter<GanttBarClickEvent>();
 
     @ViewChild('content') contentElementRef: ElementRef<HTMLDivElement>;
 
@@ -73,15 +73,15 @@ export class NgxGanttBarActualComponent extends GanttItemActualUpper implements 
         this.barClick.emit({ event, item: this.item.origin });
     }
     // 双击事件
-    onDoubleClick(event: Event) {
+    onBarDoubleClick(event: Event) {
         event.stopPropagation();
-        this.doubleClick.emit({ event, item: this.item.origin });
+        this.barDoubleClick.emit({ event, item: this.item.origin });
     }
     // 右键事件
-    oncontextmenuClick(event: Event) {
+    onBarContextmenuClick(event: Event) {
         event.stopPropagation();
         event.preventDefault();
-        this.contextmenu.emit({ event, item: this.item.origin });
+        this.barContextmenuClick.emit({ event, item: this.item.origin });
     }
 
     private setContentBackground() {

@@ -14,8 +14,8 @@
           [visibleType]="visibleType"
           [rangeTemplate]="rangeTemplate"
           (barClick)="barClick.emit($event)"
-          (doubleClick)="doubleClick.emit($event)"
-          (contextmenu)="contextmenu.emit($event)"
+          (barDoubleClick)="barDoubleClick.emit($event)"
+          (barContextmenuClick)="barContextmenuClick.emit($event)"
           (lineClick)="lineClick.emit($event)"
           #ganttMain
         >

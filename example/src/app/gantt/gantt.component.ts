@@ -59,6 +59,11 @@ export class AppGanttExampleComponent implements OnInit {
 
     loadOnScroll(event: GanttLoadOnScrollEvent) {}
 
+    barContextmenuClick(event: GanttBarClickEvent) {
+        console.log(1111);
+        console.log(event);
+    }
+
     getChildren(item: GanttItem) {
         return of([
             {

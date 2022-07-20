@@ -2,4 +2,8 @@
     position: absolute;
     top: 0;
     left: 0;
+    // background-color: #555555;
+}
+.gantt-group:last-child,.gantt-main-group:last-child {
+    border-top: 4px solid #555555;
 }

@@ -24,8 +24,8 @@
         <ng-template [ngTemplateOutlet]="itemTemplate" [ngTemplateOutletContext]="{ item: item.origin, refs: item.refs }"></ng-template>
       </ng-container>
       <gantt-range *ngIf="item.type | isGanttRangeItem" [template]="rangeTemplate" [item]="item"></gantt-range>
-      <gantt-bar *ngIf="(visibleType === 'all' || visibleType === 'plan') && item.type | isGanttBarItem" [item]="item" [template]="barTemplate" (contextmenu)="contextmenu.emit($event)" (barClick)="barClick.emit($event)" (doubleClick)="doubleClick.emit($event)"></gantt-bar>
-      <gantt-bar-actual *ngIf="(visibleType === 'all' || visibleType === 'actual') && item.type | isGanttBarItem" [item]="item" [template]="barTemplate" (contextmenu)="contextmenu.emit($event)" (barClick)="barClick.emit($event)" (doubleClick)="doubleClick.emit($event)"></gantt-bar-actual>
+      <gantt-bar *ngIf="(visibleType === 'all' || visibleType === 'plan') && item.type | isGanttBarItem" [item]="item" [template]="barTemplate" (barContextmenuClick)="barContextmenuClick.emit($event)" (barClick)="barClick.emit($event)" (barDoubleClick)="barDoubleClick.emit($event)"></gantt-bar>
+      <gantt-bar-actual *ngIf="(visibleType === 'all' || visibleType === 'actual') && item.type | isGanttBarItem" [item]="item" [template]="barTemplate" (barContextmenuClick)="barContextmenuClick.emit($event)" (barClick)="barClick.emit($event)" (barDoubleClick)="barDoubleClick.emit($event)"></gantt-bar-actual>
     </div>
     <ng-template
       *ngIf="item.children && item.expanded"

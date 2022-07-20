@@ -23,7 +23,8 @@ import {
     GanttGroupInternal,
     GanttItemInternal,
     GanttBarClickEvent,
-    GanttLinkDragEvent
+    GanttLinkDragEvent,
+    GanttItemType
 } from './class';
 import { GanttView, GanttViewOptions } from './views/view';
 import { createViewFactory } from './views/factory';
@@ -41,6 +42,8 @@ export abstract class GanttUpper {
     @Input('groups') originGroups: GanttGroup[] = [];
 
     @Input() viewType: GanttViewType = GanttViewType.month;
+
+    @Input() type: GanttItemType = GanttItemType.bar;
 
     @Input() start: number;
 
@@ -64,9 +67,9 @@ export abstract class GanttUpper {
 
     @Output() barClick = new EventEmitter<GanttBarClickEvent>();
 
-    @Output() contextmenu = new EventEmitter<GanttBarClickEvent>();
+    @Output() barContextmenuClick = new EventEmitter<GanttBarClickEvent>();
 
-    @Output() doubleClick = new EventEmitter<GanttBarClickEvent>();
+    @Output() barDoubleClick = new EventEmitter<GanttBarClickEvent>();
 
     @ContentChild('bar', { static: true }) barTemplate: TemplateRef<any>;
 
@@ -240,6 +243,7 @@ export abstract class GanttUpper {
 
     onChanges(changes: SimpleChanges) {
         if (!this.firstChange) {
+            
             if (changes.viewType && changes.viewType.currentValue) {
                 this.createView();
                 this.setupGroups();

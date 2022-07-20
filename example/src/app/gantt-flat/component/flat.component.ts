@@ -8,9 +8,11 @@ import {
     NgZone,
     ChangeDetectorRef,
     ElementRef,
-    ViewChild
+    ViewChild,
+    Output,
+    EventEmitter
 } from '@angular/core';
-import { GANTT_UPPER_TOKEN, GanttUpper, GanttItemInternal, GanttGroupInternal } from 'ngx-gantt';
+import { GANTT_UPPER_TOKEN, GanttUpper, GanttItemInternal, GanttGroupInternal, GanttBarClickEvent } from 'ngx-gantt';
 import { startWith, takeUntil } from 'rxjs/operators';
 
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
@@ -28,7 +30,6 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
 })
 export class AppGanttFlatComponent extends GanttUpper implements OnInit, OnChanges, OnDestroy {
     public root: Element;
-    public dragList: string[] = [];
     mergeIntervalDays = 3;
 
     groups: GanttGroupInternal[] = [];
@@ -43,6 +44,24 @@ export class AppGanttFlatComponent extends GanttUpper implements OnInit, OnChang
 
     constructor(elementRef: ElementRef<HTMLElement>, cdr: ChangeDetectorRef, ngZone: NgZone) {
         super(elementRef, cdr, ngZone);
+    }
+
+    ngOnInit() {
+        super.onInit();
+        this.getRootDom(this.elementRef);
+        this.dragEnded.pipe(startWith(null), takeUntil(this.unsubscribe$)).subscribe(() => {
+            this.buildGroupItems();
+        });
+        // console.log(this.groups);
+        // console.log(this.view);
+    }
+
+    private buildGroupItems() {
+        this.groups.forEach((group) => {
+            group.mergedItems = this.buildGroupMergedItems(group.items);
+            // 如果没有数据，默认填充两行空行
+            group.mergedItems = group.mergedItems.length === 0 ? [[]] : group.mergedItems;
+        });
     }
 
     private buildGroupMergedItems(items: GanttItemInternal[]) {
@@ -67,42 +86,10 @@ export class AppGanttFlatComponent extends GanttUpper implements OnInit, OnChang
         return mergedItems;
     }
 
-    ngOnInit() {
-        super.onInit();
-        this.getRootDom(this.elementRef);
-        this.dragEnded.pipe(startWith(null), takeUntil(this.unsubscribe$)).subscribe(() => {
-            this.buildGroupItems();
-        });
-        // console.log(this.groups);
-        this.setDragList(this.groups);
-    }
-
-    private setDragList(groups) {
-        groups.map((item, key) => {
-            this.dragList.push('groupList' + key);
-        });
-    }
-
-    private buildGroupItems() {
-        this.groups.forEach((group) => {
-            group.mergedItems = this.buildGroupMergedItems(group.items);
-            // 如果没有数据，默认填充两行空行
-            group.mergedItems = group.mergedItems.length === 0 ? [[]] : group.mergedItems;
-        });
-    }
-
-    drop(event: CdkDragDrop<string[]>) {
-        if (event.previousContainer === event.container) {
-            moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-        } else {
-            transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
-        }
-        console.log(event);
-
-    }
-
     ngOnChanges(changes: SimpleChanges) {
         super.onChanges(changes);
+        // 监听数据变化重新绘制甘特图
+        this.buildGroupItems();
     }
 
     getRootDom(root: ElementRef<HTMLElement>) {
@@ -128,10 +115,13 @@ export class AppGanttFlatComponent extends GanttUpper implements OnInit, OnChang
         // console.log("e.distance.x ---> " + e.distance.x);
         // console.log("this.startMove ---> " + this.startMove);
         // console.log("this.endMove ---> " + this.endMove);
-        // console.log("this.ganttMainContainer.nativeElement.clientWidth ---> " + this.ganttMainContainer.nativeElement.clientWidth);
         // console.log("this.ganttMainContainer.nativeElement.scrollLeft ---> " + this.ganttMainContainer.nativeElement.scrollLeft);
+        // console.log("boxWidth ---> " + boxWidth);
+        // console.log("clientWidth ---> " + clientWidth);
         // console.log("scrollWidth ---> " + scrollWidth);
         // console.log("===============");
+
+        if (boxWidth < clientWidth) return;
 
         if (e.distance.x > 0 && this.ganttMainContainer.nativeElement.scrollLeft === 0) {
             this.flag = true;
@@ -152,6 +142,8 @@ export class AppGanttFlatComponent extends GanttUpper implements OnInit, OnChang
     }
     // mouseup
     mainMouseUp(e) {
+        console.log(111);
+
         this.resetVirBoxDom(this.elementRef);
         this.flag = false;
         this.startMove = 0;

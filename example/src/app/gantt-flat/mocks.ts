@@ -34,7 +34,7 @@ export const mockGroups = [
     },
     {
         id: '00009',
-        title: 'Project 9'
+        title: ''
     },
 ];
 
@@ -60,17 +60,6 @@ export const mockItems = [
         title: 'VERSION 0103',
         end: 1590035000,
         group_id: '00001'
-    },
-    {
-        id: 'item-0104',
-        title: 'VERSION 0104',
-        group_id: '00001',
-        links: ['item-0301']
-    },
-    {
-        id: 'item-0201',
-        title: 'VERSION 0201',
-        group_id: '00002'
     },
     {
         id: 'item-0202',
@@ -195,6 +184,97 @@ export const mockItems = [
     {
         id: 'item-0903',
         title: 'VERSION 0903',
+        start: 1595035675,
+        end: 1609018400,
+        group_id: '00009'
+    },
+    {
+        id: 'item-0904',
+        title: 'VERSION 0904',
+        start: 1595035675,
+        end: 1609018400,
+        group_id: '00009'
+    },
+    {
+        id: 'item-0905',
+        title: 'VERSION 0905',
+        start: 1595035675,
+        end: 1609018400,
+        group_id: '00009'
+    },
+    {
+        id: 'item-0906',
+        title: 'VERSION 0906',
+        start: 1595035675,
+        end: 1609018400,
+        group_id: '00009'
+    },
+    {
+        id: 'item-0907',
+        title: 'VERSION 0907',
+        start: 1595035675,
+        end: 1609018400,
+        group_id: '00009'
+    },
+    {
+        id: 'item-0908',
+        title: 'VERSION 0908',
+        start: 1595035675,
+        end: 1609018400,
+        group_id: '00009'
+    },
+    {
+        id: 'item-0909',
+        title: 'VERSION 0909',
+        start: 1595035675,
+        end: 1609018400,
+        group_id: '00009'
+    },
+    {
+        id: 'item-0913',
+        title: 'VERSION 0913',
+        start: 1595035675,
+        end: 1609018400,
+        group_id: '00009'
+    },
+    {
+        id: 'item-0914',
+        title: 'VERSION 0914',
+        start: 1595035675,
+        end: 1609018400,
+        group_id: '00009'
+    },
+    {
+        id: 'item-0915',
+        title: 'VERSION 0915',
+        start: 1595035675,
+        end: 1609018400,
+        group_id: '00009'
+    },
+    {
+        id: 'item-0916',
+        title: 'VERSION 0916',
+        start: 1595035675,
+        end: 1609018400,
+        group_id: '00009'
+    },
+    {
+        id: 'item-0917',
+        title: 'VERSION 0917',
+        start: 1595035675,
+        end: 1609018400,
+        group_id: '00009'
+    },
+    {
+        id: 'item-0918',
+        title: 'VERSION 0918',
+        start: 1595035675,
+        end: 1609018400,
+        group_id: '00009'
+    },
+    {
+        id: 'item-0919',
+        title: 'VERSION 0919',
         start: 1595035675,
         end: 1609018400,
         group_id: '00009'

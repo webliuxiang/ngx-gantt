@@ -2,11 +2,12 @@ import { Injectable, ElementRef, OnDestroy, NgZone } from '@angular/core';
 import { DragRef, DragDrop } from '@angular/cdk/drag-drop';
 import { GanttDomService } from '../../gantt-dom.service';
 import { GanttDragContainer } from '../../gantt-drag-container';
-import { GanttItemInternal } from '../../class/item';
+import { GanttItemInternal, GanttItemType } from '../../class/item';
 import { GanttDate, differenceInCalendarDays } from '../../utils/date';
 import { fromEvent, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { GanttUpper } from '../../gantt-upper';
+import { GanttGroupInternal } from 'ngx-gantt';
 
 const dragMinWidth = 10;
 const activeClass = 'gantt-bar-active';
@@ -25,6 +26,8 @@ export class GanttBarDrag implements OnDestroy {
     private barElement: HTMLElement;
 
     private item: GanttItemInternal;
+    // 拖拽目标 group id
+    private targetGroupID: any = undefined;
 
     private get dragDisabled() {
         return !this.item.draggable || !this.ganttUpper.draggable;
@@ -72,7 +75,12 @@ export class GanttBarDrag implements OnDestroy {
 
     private createBarDrag() {
         const dragRef = this.dragDrop.createDrag(this.barElement);
-        // dragRef.lockAxis = 'x';
+        console.log(this.ganttUpper.type);
+        
+        if (this.ganttUpper.type !== GanttItemType.flat) {
+            dragRef.lockAxis = 'x';
+        }
+
         dragRef.started.subscribe(() => {
             this.setDraggingStyles();
             this.dragContainer.dragStarted.emit({ item: this.item.origin });
@@ -92,7 +100,7 @@ export class GanttBarDrag implements OnDestroy {
             this.clearDraggingStyles();
             this.closeDragBackdrop();
             event.source.reset();
-            this.dragContainer.dragEnded.emit({ item: this.item.origin });
+            this.dragContainer.dragEnded.emit({ item: this.item.origin, targetGroupID: this.targetGroupID });
         });
         this.barDragRef = dragRef;
         return dragRef;
@@ -101,7 +109,7 @@ export class GanttBarDrag implements OnDestroy {
     private createBarHandleDrags() {
         const dragRefs = [];
         const handles = this.barElement.querySelectorAll<HTMLElement>('.drag-handles .handle');
-        
+
         handles.forEach((handle, index) => {
             const isBefore = index === 0;
             const dragRef = this.dragDrop.createDrag(handle);
@@ -213,6 +221,42 @@ export class GanttBarDrag implements OnDestroy {
         const dragBackdropElement = this.dom.root.querySelector('.gantt-drag-backdrop') as HTMLElement;
         const rootRect = this.dom.root.getBoundingClientRect();
         const dragRect = dragElement.getBoundingClientRect();
+        const top = dragRect.top - rootRect.top - 44;
+        if (this.ganttUpper.type === GanttItemType.flat) {
+            let currentGroup: GanttGroupInternal;
+            let targetGroupIndex: number;
+            let flag: Boolean = true;
+            let groupHeightList = [];
+
+            this.ganttUpper.groups.map((group, key) => {
+                // console.log(group);
+                // console.log(group.title + ': --->' + (group.mergedItems?.length * this.ganttUpper.styles.lineHeight));
+                let groupHeight =
+                    (key === 0 ? 0 : groupHeightList[key - 1]) + group.mergedItems?.length * this.ganttUpper.styles.lineHeight;
+                if (flag && top < groupHeight) {
+                    targetGroupIndex = key;
+                    this.targetGroupID = group.id;
+                    flag = false;
+                }
+                groupHeightList.push(groupHeight);
+                if (group.id === this.item.origin.group_id) {
+                    currentGroup = group;
+                }
+            });
+
+            // console.log(targetGroupIndex);
+            // console.log(currentGroup);
+            // console.log(this.ganttUpper.groups[targetGroupIndex]);
+            for (let index = 0; index < this.dom.root.querySelectorAll('.gantt-main-group').length; index++) {
+                const element = this.dom.root.querySelectorAll('.gantt-main-group')[index] as HTMLElement;
+                if (index === targetGroupIndex) {
+                    element.style.backgroundColor = '#348fe450';
+                } else {
+                    element.style.backgroundColor = '';
+                }
+            }
+        }
+
         const left = dragRect.left - rootRect.left - this.dom.side.clientWidth;
         const width = dragRect.right - dragRect.left;
         dragMaskElement.style.left = left + 'px';
@@ -272,7 +316,6 @@ export class GanttBarDrag implements OnDestroy {
     }
 
     createDrags(elementRef: ElementRef, item: GanttItemInternal, ganttUpper: GanttUpper) {
-        
         this.item = item;
         this.barElement = elementRef.nativeElement;
         this.ganttUpper = ganttUpper;

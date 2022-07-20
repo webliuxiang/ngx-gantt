@@ -1,4 +1,4 @@
-<!-- <div class="gantt-demo-header">
+<div class="gantt-demo-header">
   <div class="header-section">
     <span class="header-section-title">视图：</span>
     <span class="header-section-content">
@@ -24,7 +24,7 @@
       <button (click)="print('gantt-flat')">导出为图片</button>
     </span>
   </div>
-</div> -->
+</div>
 <div class="gantt-demo-content">
   <app-gantt-flat
     #gantt
@@ -32,12 +32,20 @@
     [end]="1609354000"
     [items]="items"
     [groups]="groups"
+    [type]="options.type"
     [viewType]="options.viewType"
     [draggable]="options.draggable"
     [styles]="options.styles"
+    (dragEnded)="dragEnded($event)"
+    (barClick)="barClick($event)"
+    (barContextmenuClick)="barContextmenuClick($event)"
+    *ngIf="showGantt"
   >
     <ng-template #group let-group="group">
       {{ group.title }}
+    </ng-template>
+    <ng-template #bar let-item="item">
+      <span style="color: #fff">&nbsp;&nbsp;{{ item.title }}</span>
     </ng-template>
   </app-gantt-flat>
 </div>

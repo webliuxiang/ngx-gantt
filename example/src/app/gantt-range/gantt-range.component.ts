@@ -57,8 +57,6 @@ export class AppGanttRangeExampleComponent implements OnInit {
         console.log(event);
     }
     oncontextmenuClick(event) {
-        console.log(event.pointerType);
-        
         console.log(1111);
         console.log(event);
     }

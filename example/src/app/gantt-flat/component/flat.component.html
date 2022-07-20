@@ -3,52 +3,23 @@
     <div class="gantt-flat-side-header">项目</div>
     <div class="gantt-flat-side-body">
       <div class="gantt-group" *ngFor="let group of groups; trackBy: trackBy">
-        <div class="gantt-group-content" [style.height.px]="group.mergedItems?.length * (styles.lineHeight + 10) - 10">
+        <div class="gantt-group-content" [style.height.px]="group.mergedItems?.length * styles.lineHeight">
           {{ group.title }}
         </div>
       </div>
     </div>
-    <!-- <ng-template *ngFor="let group of groups; trackBy: trackBy"> -->
-
-    <!-- <table>
-        <thead>
-          <tr>
-            <td>ID</td>
-            <td>title</td>
-            <td>start</td>
-            <td>group id</td>
-          </tr>
-        </thead>
-        <tbody>
-          <ng-container *ngFor="let group of groups; trackBy: trackBy">
-            <tr *ngFor="let item of group.items">
-              <td>{{item.origin.id}}</td>
-              <td>{{item.origin.title}}</td>
-              <td>{{item.origin.start}}</td>
-              <td>{{item.origin.group_id}}</td>
-            </tr>
-          </ng-container>
-        </tbody>
-      </table> -->
-    <!-- </ng-template> -->
   </ng-template>
   <ng-template #mainTemplate>
-    <div class="gantt-main-container" #ganttMainContainer cdkDropListGroup>
+    <div class="gantt-main-container" #ganttMainContainer>
       <!-- groups -->
       <div class="gantt-main-groups" *ngIf="groups && groups.length > 0" [style.width.px]="view.width">
         <ng-container *ngFor="let group of groups; trackBy: trackBy; let i = index">
           <!-- list -->
-          <div
-            class="gantt-main-group"
-            [style.height.px]="group.mergedItems?.length * (styles.lineHeight + 10) - 10"
-            cdkDropList
-            [cdkDropListData]="group.mergedItems"
-            (cdkDropListDropped)="drop($event)"
-          >
+          <div class="gantt-main-group" [style.height.px]="group.mergedItems?.length * styles.lineHeight">
             <ng-container *ngFor="let items of group.mergedItems">
               <div class="gantt-flat-items" [style.height.px]="styles.lineHeight">
                 <ng-container *ngFor="let item of items; trackBy: trackBy">
-                  <ngx-gantt-bar [item]="item" [template]="barTemplate" (barClick)="barClick.emit($event)"></ngx-gantt-bar>
+                  <ngx-gantt-bar [item]="item" [template]="barTemplate" (barClick)="barClick.emit($event)" (barContextmenuClick)="barContextmenuClick.emit($event)"></ngx-gantt-bar>
                 </ng-container>
               </div>
             </ng-container>
@@ -67,7 +38,7 @@
         (cdkDragEnded)="mainMouseUp($event)"
       >
         <ng-container *ngFor="let group of groups; trackBy: trackBy">
-          <div class="gantt-main-group" [style.height.px]="group.mergedItems?.length * (styles.lineHeight + 10) - 10"></div>
+          <div class="" [style.height.px]="group.mergedItems?.length * styles.lineHeight"></div>
         </ng-container>
       </div>
     </div>

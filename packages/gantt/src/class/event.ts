@@ -4,6 +4,7 @@ import { GanttItem } from './item';
 
 export class GanttDragEvent<T = unknown> {
     item: GanttItem<T>;
+    targetGroupID?: any;
 }
 
 export class GanttTableEvent {
