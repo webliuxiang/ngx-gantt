@@ -108,7 +108,7 @@ $gantt-bar-link-drop-border: 5px;
     position: absolute;
     border-radius: 4px;
     z-index: 2;
-    background: $gantt-bar-bg;
+    // background: $gantt-bar-bg;
 
     .gantt-bar-layer {
         width: calc(100% + #{$gantt-bar-layer-append-width});

@@ -81,7 +81,8 @@ export class NgxGanttBarComponent extends GanttItemUpper implements OnInit, Afte
     onBarContextmenuClick(event: Event) {
         event.stopPropagation();
         event.preventDefault();
-        this.barContextmenuClick.emit({ event, item: this.item.origin });
+        
+        this.barContextmenuClick.emit({ event, item: this.item.origin, barType: 'plan' });
     }
 
     private setContentBackground() {

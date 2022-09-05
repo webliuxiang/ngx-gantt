@@ -7,7 +7,8 @@ import { GanttDate, differenceInCalendarDays } from '../../utils/date';
 import { fromEvent, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { GanttUpper } from '../../gantt-upper';
-import { GanttGroupInternal } from 'ngx-gantt';
+import { GanttViewType } from '../../class/view-type';
+import { GanttGroupInternal } from '../../class/group';
 
 const dragMinWidth = 10;
 const activeClass = 'gantt-bar-active';
@@ -75,8 +76,7 @@ export class GanttBarDrag implements OnDestroy {
 
     private createBarDrag() {
         const dragRef = this.dragDrop.createDrag(this.barElement);
-        console.log(this.ganttUpper.type);
-        
+
         if (this.ganttUpper.type !== GanttItemType.flat) {
             dragRef.lockAxis = 'x';
         }
@@ -86,11 +86,23 @@ export class GanttBarDrag implements OnDestroy {
             this.dragContainer.dragStarted.emit({ item: this.item.origin });
         });
         dragRef.moved.subscribe((event) => {
-            const x = this.item.refs.x + event.distance.x;
-            const days = differenceInCalendarDays(this.item.end.value, this.item.start.value);
-            const start = this.ganttUpper.view.getDateByXPoint(x);
-            const end = start.addDays(days);
-            this.openDragBackdrop(this.barElement, this.ganttUpper.view.getDateByXPoint(x), end);
+            if (this.ganttUpper.viewType === GanttViewType.hour) {
+                const x = this.item.refs.x + event.distance.x;
+                const days = differenceInCalendarDays(this.item.end.value, this.item.start.value);
+                const start = this.ganttUpper.view.getDateByXPoint(x);
+                const end = start.addDays(days);
+                console.log('x --->' + x);
+                console.log('days --->' + days);
+                console.log('start --->' + start.format('yyyy/MM/dd k:mm:ss'));
+                console.log('end --->' + end.format('yyyy/MM/dd k:mm:ss'));
+                console.log('===========');
+            } else {
+                const x = this.item.refs.x + event.distance.x;
+                const days = differenceInCalendarDays(this.item.end.value, this.item.start.value);
+                const start = this.ganttUpper.view.getDateByXPoint(x);
+                const end = start.addDays(days);
+                this.openDragBackdrop(this.barElement, this.ganttUpper.view.getDateByXPoint(x), end, event);
+            }
         });
         dragRef.ended.subscribe((event) => {
             const days = differenceInCalendarDays(this.item.end.value, this.item.start.value);
@@ -216,12 +228,14 @@ export class GanttBarDrag implements OnDestroy {
         return dragRefs;
     }
 
-    private openDragBackdrop(dragElement: HTMLElement, start: GanttDate, end: GanttDate) {
+    private openDragBackdrop(dragElement: HTMLElement, start: GanttDate, end: GanttDate, event?) {
         const dragMaskElement = this.dom.root.querySelector('.gantt-drag-mask') as HTMLElement;
         const dragBackdropElement = this.dom.root.querySelector('.gantt-drag-backdrop') as HTMLElement;
         const rootRect = this.dom.root.getBoundingClientRect();
         const dragRect = dragElement.getBoundingClientRect();
         const top = dragRect.top - rootRect.top - 44;
+        
+
         if (this.ganttUpper.type === GanttItemType.flat) {
             let currentGroup: GanttGroupInternal;
             let targetGroupIndex: number;
@@ -233,6 +247,7 @@ export class GanttBarDrag implements OnDestroy {
                 // console.log(group.title + ': --->' + (group.mergedItems?.length * this.ganttUpper.styles.lineHeight));
                 let groupHeight =
                     (key === 0 ? 0 : groupHeightList[key - 1]) + group.mergedItems?.length * this.ganttUpper.styles.lineHeight;
+
                 if (flag && top < groupHeight) {
                     targetGroupIndex = key;
                     this.targetGroupID = group.id;

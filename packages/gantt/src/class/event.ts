@@ -30,4 +30,5 @@ export class GanttLineClickEvent<T = unknown> {
 export class GanttBarClickEvent<T = unknown> {
     event: Event;
     item: GanttItem<T>;
+    barType?: string;
 }

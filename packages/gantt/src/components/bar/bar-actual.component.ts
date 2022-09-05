@@ -81,7 +81,8 @@ export class NgxGanttBarActualComponent extends GanttItemActualUpper implements 
     onBarContextmenuClick(event: Event) {
         event.stopPropagation();
         event.preventDefault();
-        this.barContextmenuClick.emit({ event, item: this.item.origin });
+        
+        this.barContextmenuClick.emit({ event, item: this.item.origin,barType: 'actual' });
     }
 
     private setContentBackground() {

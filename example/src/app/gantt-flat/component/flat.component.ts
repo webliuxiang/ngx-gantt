@@ -133,7 +133,7 @@ export class AppGanttFlatComponent extends GanttUpper implements OnInit, OnChang
 
         if (this.flag) return;
         // this.ganttMainContainer.nativeElement.scrollLeft -= e.distance.x/15;
-        let moveDistance = this.startMove - this.endMove;
+        let moveDistance = (this.startMove - this.endMove) || 0;
         // console.log(moveDistance);
 
         this.ganttMainContainer.nativeElement.scrollLeft -= moveDistance;

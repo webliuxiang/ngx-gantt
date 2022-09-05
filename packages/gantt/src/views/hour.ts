@@ -3,7 +3,7 @@ import { GanttDate, differenceInCalendarQuarters, eachDayOfInterval,eachHourOfIn
 import { GanttDatePoint } from '../class/date-point';
 
 const viewOptions: GanttViewOptions = {
-    cellWidth: 15,
+    cellWidth: 30,
     start: new GanttDate().startOfYear().startOfDay(),
     end: new GanttDate().endOfYear().endOfDay(),
     addAmount: 1,

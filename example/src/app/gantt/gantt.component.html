@@ -43,8 +43,8 @@
 <div class="gantt-demo-content">
   <ngx-gantt
     #gantt
-    [start]="1640966400"
-    [end]="1651334400"
+    [start]="1642003200"
+    [end]="1642175999"
     [items]="items"
     [viewType]="options.viewType"
     [draggable]="options.draggable"
@@ -65,12 +65,12 @@
       <ngx-gantt-column width="180px">
         <ng-template #header> <span>开始时间</span> </ng-template>
         <ng-template #cell let-item="item">
-          {{ item.start * 1000 | date: 'yyyy-MM-dd' }}
+          {{ item.start * 1000 | date: 'yyyy-MM-dd hh:mm:ss' }}
         </ng-template>
       </ngx-gantt-column>
-      <ngx-gantt-column name="截止时间">
+      <ngx-gantt-column name="截止时间" width="180px">
         <ng-template #cell let-item="item">
-          {{ item.end * 1000 | date: 'yyyy-MM-dd' }}
+          {{ item.end * 1000 | date: 'yyyy-MM-dd hh:mm:ss' }}
         </ng-template>
       </ngx-gantt-column>
     </ngx-gantt-table>

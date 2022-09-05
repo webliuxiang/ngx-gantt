@@ -20,7 +20,7 @@ export class AppGanttFlatExampleComponent implements OnInit, OnDestroy {
     groups = mockGroups;
 
     options = {
-        viewType: GanttViewType.month,
+        viewType: GanttViewType.day,
         type: GanttItemType.flat,
         draggable: true,
         mergeIntervalDays: 3,
